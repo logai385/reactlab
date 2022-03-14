@@ -1,0 +1,3 @@
+export const LOGIN_API='LOGIN_API';
+export const SET_AUTHTOKEN='SET_AUTHTOKEN';
+export const CHECK_AUTH_API='CHECK_AUTH_API';

@@ -6,18 +6,21 @@ import {
   UploadOutlined,
   TeamOutlined,
   MenuOutlined,
+  AppstoreOutlined
 } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { Link, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import FooterContent from "./Footer/Footer";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const Main = () => {
+  const { user } = useSelector((state) => state.AuthReducer);
   const [state, setState] = useState({
     collapsed: false,
   });
   const toggle = () => {
-    
     setState({ ...state, collapsed: !state.collapsed });
   };
   return (
@@ -40,42 +43,48 @@ const Main = () => {
           }}
         >
           <div className="brand__link">
-            <img src="./logo192.png" alt="logo" />
-            <span className="brand-text">Hoàng Giang</span>
+            <img src="./img/logo.png" alt="logo" />
+            <span className="brand-text">Quản lý Tuyến</span>
           </div>
           <div className="user-panel">
             <div>
               <div className="image">
-                <img src="./logo512.png" alt="logo" />
+                <img
+                  src={`https://ui-avatars.com/api/?name=${user.username}`}
+                  alt="avatar"
+                />
               </div>
-              <div className="info">Alexander Pierce</div>
+              <div className="info">{user.username}</div>
             </div>
           </div>
 
-          <Menu mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu mode="inline" defaultSelectedKeys={null}>
             <Menu.Item key="1">
-              <Link to="/Dashboard">
+              <Link to="/dashboard" key="1">
                 <i className="nav-icon fas fa-tachometer-alt"></i> Dashboard
               </Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              <Link to="/Transporter">nav 2</Link>
-            </Menu.Item>
-
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-              <Menu.Item key="4" icon={<UploadOutlined />}>
-                Tom
+            <SubMenu
+              key="sub1"
+              icon={<AppstoreOutlined />}
+              title="Quản lý"
+            >
+              <Menu.Item key="sub1_1">
+                <Link to="/line">
+                  <i className="nav-icon fa fa-route"></i> Tuyến
+                </Link>
               </Menu.Item>
-              <Menu.Item key="5">Bill</Menu.Item>
-              <Menu.Item key="6">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-              <Menu.Item key="7">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
+              <Menu.Item key="sub1_2">
+                <Link to="/transporter">
+                  <i className="nav-icon fa fa-bus-alt"></i> Xe
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="6">
+                <Link to="/document">
+                  <i className="nav-icon fa fa-file-alt"></i> Giấy phép
+                </Link>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -86,12 +95,11 @@ const Main = () => {
               onClick={toggle}
             />
           </Header>
-       
 
           <Content>
             <Outlet />
           </Content>
-          <Footer>Footer</Footer>
+          <FooterContent />
         </Layout>
       </Layout>
     </>

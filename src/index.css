@@ -49,6 +49,9 @@ html {
 .ant-menu-submenu-arrow {
   color: inherit;
 }
+.ant-layout-content{
+  padding: 0.6rem 1.5rem;
+}
 .brand__link {
   border-bottom: 1px solid #4b545c;
   /* line-height: 59px; */
@@ -109,6 +112,54 @@ html {
   padding: 0 1.5rem 0.5rem 1.5rem;
 }
 .nav-icon {
+  font-size: 1.1rem;
+  margin-right: 5px;
+}
+
+
+.login{
+  width: 100%;
+}
+.login .login__left{
+  width: 100%;
+  
+  background-image: url('https://picsum.photos/1200');
+  background-size: cover;
+  background-position: center;
+  height:100vh;
+}
+.login .login__right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login__right form{
+  width: 80%;
+}
+
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+.MuiTable-root p{
+  margin-bottom: 0;
+}
+
+.card-body{
+  padding: 5px 10px;
+}
+#root{
+  height: 100vh;
+}
+
+.main-header{
+  z-index: 1;
+}
+.ant-menu-item .ant-menu-item-icon, .ant-menu-submenu-title .ant-menu-item-icon, .ant-menu-item .anticon, .ant-menu-submenu-title .anticon{
   font-size: 1.1rem;
   margin-right: 5px;
 }
