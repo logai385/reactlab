@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Layout, Menu, Breadcrumb, Button } from "antd";
+import { Layout, Menu } from "antd";
 import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
   TeamOutlined,
   MenuOutlined,
-  DashboardOutlined,
 } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
+import { Link, Outlet } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -17,14 +17,14 @@ const Main = () => {
     collapsed: false,
   });
   const toggle = () => {
-    setState({
-      collapsed: !state.collapsed,
-    });
+    
+    setState({ ...state, collapsed: !state.collapsed });
   };
   return (
     <>
       <Layout className="mainLayout">
         <Sider
+          width="230"
           className="mainSider"
           trigger={null}
           collapsed={state.collapsed}
@@ -43,7 +43,7 @@ const Main = () => {
             <img src="./logo192.png" alt="logo" />
             <span className="brand-text">Hoàng Giang</span>
           </div>
-          <div class="user-panel">
+          <div className="user-panel">
             <div>
               <div className="image">
                 <img src="./logo512.png" alt="logo" />
@@ -54,11 +54,15 @@ const Main = () => {
 
           <Menu mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <i class="nav-icon fas fa-tachometer-alt"></i> Dashboard
+              <Link to="/Dashboard">
+                <i className="nav-icon fas fa-tachometer-alt"></i> Dashboard
+              </Link>
             </Menu.Item>
+
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
+              <Link to="/Transporter">nav 2</Link>
             </Menu.Item>
+
             <Menu.Item key="3" icon={<UploadOutlined />}>
               nav 3
             </Menu.Item>
@@ -82,15 +86,11 @@ const Main = () => {
               onClick={toggle}
             />
           </Header>
-          <div className="breadcrumb__path">
-            <Breadcrumb>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
-          </div>
+       
 
-          <Content>Content</Content>
+          <Content>
+            <Outlet />
+          </Content>
           <Footer>Footer</Footer>
         </Layout>
       </Layout>
