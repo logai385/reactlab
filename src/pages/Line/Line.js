@@ -47,6 +47,7 @@ export default function RegisterLine() {
         title: "#",
         dataIndex: "index",
         key: "index",
+        width:"10%",
       },
       {
         title: "Số Tuyến",
@@ -78,6 +79,8 @@ export default function RegisterLine() {
       {
         title: "Action",
         key: "id",
+        fixed: 'right',
+        width:"10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -112,7 +115,7 @@ export default function RegisterLine() {
         id: line._id,
       };
     });
-    return <Table rowKey="id" dataSource={dataSource} columns={columns} />;
+    return <Table rowKey="id" dataSource={dataSource} columns={columns}  size="small"  scroll={{ x: 768}}/>;
   };
   return (
     <>

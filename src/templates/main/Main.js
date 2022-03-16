@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { Layout, Menu } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  TeamOutlined,
-  MenuOutlined,
-  AppstoreOutlined
-} from "@ant-design/icons";
+import { MenuOutlined, AppstoreOutlined } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FooterContent from "./Footer/Footer";
+import Modal from "../../HOC/Modal";
 
 const { Header, Sider, Content } = Layout;
 
@@ -36,10 +30,9 @@ const Main = () => {
           onBreakpoint={(broken) => {
             setState({ collapsed: broken });
           }}
-          style={{ width: "250px", maxWidth: "250px" }}
           onCollapse={(collapsed, type) => {
-            console.log("onCollapse", collapsed, type);
-            // setState({collapsed: true});
+            // console.log("onCollapse", collapsed, type);
+            // // setState({collapsed: true});
           }}
         >
           <div className="brand__link">
@@ -65,11 +58,7 @@ const Main = () => {
               </Link>
             </Menu.Item>
 
-            <SubMenu
-              key="sub1"
-              icon={<AppstoreOutlined />}
-              title="Quản lý"
-            >
+            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Quản lý">
               <Menu.Item key="sub1_1">
                 <Link to="/line">
                   <i className="nav-icon fa fa-route"></i> Tuyến
@@ -102,6 +91,8 @@ const Main = () => {
           <FooterContent />
         </Layout>
       </Layout>
+      <Modal />
+
     </>
   );
 };

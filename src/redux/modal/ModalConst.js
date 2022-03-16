@@ -1,0 +1,4 @@
+export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const OPEN_FORM_EDIT = "OPEN_FORM_EDIT_PROJECT";
+export const SET_SUBMIT_EDIT = "SET_SUBMIT_EDIT_PROJECT";

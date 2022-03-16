@@ -9,14 +9,19 @@ import {
 import { Button, Space, Table, Tag } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
+import { SHOW_MODAL } from "../../redux/modal/ModalConst";
+import { openFormEdit } from "../../redux/modal/ModalAction";
+import SignDocumentForm from "./SignDocumentForm";
 
 export default function SignDocument() {
   const documentList = useSelector(
     (state) => state.DocumentReducer.documentList
   );
-
+  const visible = useSelector((state) => state.ModalReducer.visible);
   const dispatch = useDispatch();
-
+  const showModal = () => {
+    dispatch({ type: SHOW_MODAL });
+  };
   useEffect(() => {
     getDocumentList();
 
@@ -40,6 +45,7 @@ export default function SignDocument() {
         title: "#",
         dataIndex: "#",
         key: "#",
+        width:"10%",
       },
       {
         title: "Ngày",
@@ -82,8 +88,9 @@ export default function SignDocument() {
       },
       {
         title: "Action",
-
         key: "id",
+        fixed: 'right',
+        width:"10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -116,7 +123,7 @@ export default function SignDocument() {
       };
     });
 
-    return <Table rowKey="id" dataSource={dataSource} columns={columns} />;
+    return <Table rowKey="id" dataSource={dataSource} columns={columns}  size="small"  scroll={{ x: 768}}/>;
   };
 
   return (
@@ -143,7 +150,11 @@ export default function SignDocument() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  <button className="btn btn-primary" type="button">
+                  <button className="btn btn-primary" type="button" onClick={()=>{
+                    dispatch(openFormEdit(
+                      <SignDocumentForm/>
+                    ))
+                  }}>
                     <i class="fa fa-plus"></i>
                   </button>
                 </div>

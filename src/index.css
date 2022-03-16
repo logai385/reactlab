@@ -159,7 +159,26 @@ html {
 .main-header{
   z-index: 1;
 }
+.ant-menu{
+  font-size: 1rem;
+}
 .ant-menu-item .ant-menu-item-icon, .ant-menu-submenu-title .ant-menu-item-icon, .ant-menu-item .anticon, .ant-menu-submenu-title .anticon{
   font-size: 1.1rem;
   margin-right: 5px;
+}
+.ant-drawer-content-wrapper{
+  width: 50%!important;
+}
+.ant-drawer-body{
+  padding: 10px 0;
+}
+@media (max-width: 767.98px) {
+  .ant-drawer-content-wrapper{
+    width: 70%!important;
+  }
+}
+@media (max-width: 667px) {
+  .ant-drawer-content-wrapper{
+    width: 80%!important;
+  }
 }

@@ -10,7 +10,7 @@ import {
 } from "../../redux/transporter/TransporterAction";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 
-export default function Transporters() {
+export default function Transporter() {
   const dispatch = useDispatch();
   // const history = useHistory();
   const { transporterList } = useSelector((state) => state.TransporterReducer);
@@ -52,6 +52,7 @@ export default function Transporters() {
         title: "#",
         dataIndex: "index",
         key: "index",
+        width:"10%",
       },
 
       {
@@ -92,9 +93,10 @@ export default function Transporters() {
       },
 
       {
-        title: "Action",
-
+        title: "Action",        
         key: "_id",
+        fixed: 'right',
+        width:"10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -132,7 +134,7 @@ export default function Transporters() {
       };
     });
 
-    return <Table rowKey="_id" dataSource={dataSource} columns={columns} />;
+    return <Table rowKey="_id" dataSource={dataSource} columns={columns}  size="small" scroll={{ x: 768}} />;
   };
 
   return (
