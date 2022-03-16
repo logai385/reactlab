@@ -1,5 +1,6 @@
 import { call, put, takeLatest, delay, select } from "redux-saga/effects";
 import LineService from "../../services/LineService";
+import { HIDE_MODAL } from "../modal/ModalConst";
 import { setLineListAct } from "./LineAction";
 import {
   ADD_LINE_API,
@@ -21,6 +22,9 @@ function* addLineApi(action) {
   try {
     const { data, status } = yield call(LineService.addNewLine, action.line);
     if (data.success) {
+      yield put({type:GET_LINE_LIST_API});
+      yield put({type:HIDE_MODAL});
+
       yield delay(300);
     }
   } catch (error) {}
@@ -28,7 +32,11 @@ function* addLineApi(action) {
 function* updateLineApi(action) {
   try {
     const { data, status } = yield call(LineService.updateLine, action.line);
+    
     if (data.success) {
+      yield put({type:GET_LINE_LIST_API});
+      yield put({type:HIDE_MODAL});
+
     }
   } catch (error) {}
 }

@@ -154,6 +154,7 @@ export default function SignDocument() {
                     dispatch(openFormEdit(
                       <SignDocumentForm/>
                     ))
+                    // showModal()
                   }}>
                     <i class="fa fa-plus"></i>
                   </button>

@@ -1,19 +1,19 @@
 import { SET_EDIT_LINE, SET_LINE_LIST } from "./LineConst";
 
 const initialState = {
-  lineList: [],
+  lineList: [],  
   editingLine:{
     id:"",
     lineNumber:1,
     description:"",
+    user:null,
     status:true
   }
 };
 
 const LineReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LINE_LIST:
-   
+    case SET_LINE_LIST:   
       return { ...state,lineList:action.lineList};
     case SET_EDIT_LINE:
       return { ...state,editingLine:action.line};

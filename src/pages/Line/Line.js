@@ -9,6 +9,8 @@ import {
 import { Space, Table, Tag } from "antd";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
+import LineForm from "./LineForm";
+import { openFormEdit } from "../../redux/modal/ModalAction";
 export default function RegisterLine() {
   // Initialize state & action
   const { lineList } = useSelector((state) => state.LineReducer);
@@ -16,7 +18,7 @@ export default function RegisterLine() {
   // const history = useHistory();
   useEffect(() => {
     getLineList();
-
+    console.log(lineList);
     return () => {};
   }, []);
   // action
@@ -24,8 +26,9 @@ export default function RegisterLine() {
     dispatch(getLineListAct());
   };
   const editeLine = (line) => {
-    dispatch(setEditLineAct(line));
-    // history.push("/lines/edit");
+    const lineEdit = { ...line, user: line.user._id };
+    dispatch(setEditLineAct(lineEdit));
+    dispatch(openFormEdit(<LineForm />));
   };
   const delLine = (id) => {
     dispatch(deleteLineAct(id));
@@ -35,10 +38,11 @@ export default function RegisterLine() {
       id: "",
       lineNumber: 1,
       description: "",
+      user: null,
       status: true,
     };
     dispatch(setEditLineAct(line));
-    // history.push("/lines/add");
+    dispatch(openFormEdit(<LineForm />));
   };
   //render functions
   const renderLineList = () => {
@@ -47,7 +51,13 @@ export default function RegisterLine() {
         title: "#",
         dataIndex: "index",
         key: "index",
-        width:"10%",
+        width: "10%",
+      },
+      {
+        title: "Nhân viên",
+        dataIndex: "user",
+        key: "user",
+        render: (user) => <b>{user?.username}</b>,
       },
       {
         title: "Số Tuyến",
@@ -79,8 +89,8 @@ export default function RegisterLine() {
       {
         title: "Action",
         key: "id",
-        fixed: 'right',
-        width:"10%",
+        fixed: "right",
+        width: "10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -112,16 +122,25 @@ export default function RegisterLine() {
         lineNumber: line.lineNumber,
         description: line.description,
         status: line.status,
+        user: line.user,
         id: line._id,
       };
     });
-    return <Table rowKey="id" dataSource={dataSource} columns={columns}  size="small"  scroll={{ x: 768}}/>;
+    return (
+      <Table
+        rowKey="id"
+        dataSource={dataSource}
+        columns={columns}
+        size="small"
+        scroll={{ x: 768 }}
+      />
+    );
   };
   return (
     <>
       <div className="content-wrapper">
         {/* Content Header (Page header) */}
-        <section className="content-header">    
+        <section className="content-header">
           <MainBreadcrumb contentTitle="Danh sách tuyến" />
         </section>
         {/* Main content */}
@@ -140,7 +159,13 @@ export default function RegisterLine() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  <button className="btn btn-primary" type="button">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => {
+                      pushToAdd();
+                    }}
+                  >
                     <i class="fa fa-plus"></i>
                   </button>
                 </div>

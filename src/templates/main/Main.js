@@ -43,11 +43,11 @@ const Main = () => {
             <div>
               <div className="image">
                 <img
-                  src={`https://ui-avatars.com/api/?name=${user.username}`}
+                  src={`https://ui-avatars.com/api/?name=${user?.username}`}
                   alt="avatar"
                 />
               </div>
-              <div className="info">{user.username}</div>
+              <div className="info">{user?.username}</div>
             </div>
           </div>
 

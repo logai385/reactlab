@@ -84,7 +84,6 @@ const SignDocumentForm = (props) => {
     formData.append("dateSign", signDocument.dateSign);
     formData.append("transporter", signDocument.transporter);
     formData.append("line", signDocument.line);
-
     formData.append("documentImg", signDocument.documentImg);
 
     dispatch({
@@ -131,7 +130,11 @@ const SignDocumentForm = (props) => {
                         <DatePicker
                           name="dateSign"
                           size="large"
-                          value={new Date(values.dateSign)}
+                          // value={()=>{
+                          //   let newDate = new Date.now();
+                          //   return newDate.toString();
+                          // }}
+                          
                           style={{ width: "100%" }}
                           onChange={handleDateChange}
                         />
@@ -151,7 +154,7 @@ const SignDocumentForm = (props) => {
                       </Select>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputAddress ">Số Xe</label>
+                      <label>Số Xe</label>
                       <Select
                         name="transporter"
                         size="large"
@@ -162,7 +165,7 @@ const SignDocumentForm = (props) => {
                       </Select>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputAddress">Số Chuyến </label>
+                      <label >Số Chuyến </label>
                       <Input
                         size="large"
                         type="number"
@@ -172,7 +175,7 @@ const SignDocumentForm = (props) => {
                       ></Input>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputAddress">File </label>
+                      <label>File </label>
                       <Input
                         size="large"
                         type="file"

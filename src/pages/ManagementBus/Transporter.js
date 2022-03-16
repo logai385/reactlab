@@ -52,7 +52,7 @@ export default function Transporter() {
         title: "#",
         dataIndex: "index",
         key: "index",
-        width:"10%",
+        width: "10%",
       },
 
       {
@@ -93,10 +93,10 @@ export default function Transporter() {
       },
 
       {
-        title: "Action",        
+        title: "Action",
         key: "_id",
-        fixed: 'right',
-        width:"10%",
+        fixed: "right",
+        width: "10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -134,7 +134,15 @@ export default function Transporter() {
       };
     });
 
-    return <Table rowKey="_id" dataSource={dataSource} columns={columns}  size="small" scroll={{ x: 768}} />;
+    return (
+      <Table
+        rowKey="_id"
+        dataSource={dataSource}
+        columns={columns}
+        size="small"
+        scroll={{ x: 768 }}
+      />
+    );
   };
 
   return (
@@ -147,7 +155,6 @@ export default function Transporter() {
         {/* Main content */}
 
         <section className="content">
-         
           <div className="row mb-3">
             <div className="col-12 col-md-6 offset-md-6">
               <div className="input-group">
@@ -160,31 +167,38 @@ export default function Transporter() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  <button className="btn btn-primary" type="button">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => {
+                      // dispatch(openFormEdit(
+                      //   <SignDocumentForm/>
+                      // ))
+                    }}
+                  >
                     <i class="fa fa-plus"></i>
                   </button>
                 </div>
               </div>
             </div>
           </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="card">
-                  {/* <div className="card-header">
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                {/* <div className="card-header">
                     <h3 className="card-title">
                       DataTable with default features
                     </h3>
                   </div> */}
-                  {/* /.card-header */}
-                  <div className="card-body">{renderTransporterList()}</div>
-                  {/* /.card-body */}
-                </div>
-                {/* /.card */}
+                {/* /.card-header */}
+                <div className="card-body">{renderTransporterList()}</div>
+                {/* /.card-body */}
               </div>
-              {/* /.col */}
+              {/* /.card */}
             </div>
-            {/* /.row */}
-         
+            {/* /.col */}
+          </div>
+          {/* /.row */}
         </section>
         {/* /.content */}
       </div>

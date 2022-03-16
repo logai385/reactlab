@@ -1,0 +1,2 @@
+export const GET_OPERATOR ="GET_OPERATOR"
+export const SET_OPERATOR ="SET_OPERATOR"

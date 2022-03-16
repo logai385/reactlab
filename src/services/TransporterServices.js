@@ -5,20 +5,20 @@ class transporterService{
     constructor(){}
     getTransporterList=()=>{
         return Axios({
-            url: `${API_URL}/qlnv/transporters`,
+            url: `${API_URL}/transporters`,
             method: 'GET',
         })
     }
     deleteTransporter=(id)=>{
         return Axios({
-            url: `${API_URL}/qlnv/transporters/${id}`,
+            url: `${API_URL}/transporters/${id}`,
             method: 'DELETE',
         })
     }
     addTransporter=(transporter)=>{
         console.log(transporter);
         return Axios({
-            url: `${API_URL}/qlnv/transporters`,
+            url: `${API_URL}/transporters`,
             method: 'POST',
             data: {
                 "plate": transporter.plate,
@@ -30,7 +30,7 @@ class transporterService{
     uppdateTransporter=(transporter)=>{
         console.log(transporter);
         return Axios({
-            url: `${API_URL}/qlnv/transporters`,
+            url: `${API_URL}/transporters`,
             method: 'PUT',
             data: {
                 "id": transporter.id,
