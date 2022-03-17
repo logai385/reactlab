@@ -49,7 +49,7 @@ const SignDocumentForm = (props) => {
     setFieldValue("transporter", "");      
   };
   const handleChangeFile = (e) => {
-    const file = e.currentTarget.files[0];
+    const file = e.target.files[0];
     setFieldValue("documentImg", file);
   };
 
@@ -90,6 +90,7 @@ const SignDocumentForm = (props) => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   encType="multipart/form-data"
+                  onSubmit={handleSubmit}
                 >
                   <div className="card-body">
                     <input name="id" type="hidden" />
@@ -146,7 +147,7 @@ const SignDocumentForm = (props) => {
                         type="file"
                         name="documentImg"
                         onChange={handleChangeFile}
-                        value={values.documentImg}
+                        
                       ></Input>
                     </div>
                   </div>
@@ -181,11 +182,11 @@ const SignDocumentFormik = withFormik({
     formData.append("line", values.line);
     formData.append("quantity", values.quantity);
     formData.append("documentImg", values.documentImg);
-    // console.log(formData);
+    
     props.dispatch(addSignDocumentAct(formData));
   },
 
-  displayName: "BasicForm",
+  displayName: "SignDocumentForm",
 })(SignDocumentForm);
 const mapStateToProps = (state) => {
   return {

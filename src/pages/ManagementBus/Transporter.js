@@ -37,7 +37,7 @@ export default function Transporter() {
     dispatch(setEditingTransporterAct(transporterEdit));
     dispatch(openFormEdit(<TransporterForm />));
   };
-  const handleClickADD = () => {
+  const handleClickAdd = () => {
     const transporter = {
       id: "",
       plate: "",
@@ -174,10 +174,10 @@ export default function Transporter() {
                     className="btn btn-primary"
                     type="button"
                     onClick={() => {
-                      handleClickADD();
+                      handleClickAdd();
                     }}
                   >
-                    <i class="fa fa-plus"></i>
+                    <i className="fa fa-plus"></i>
                   </button>
                 </div>
               </div>

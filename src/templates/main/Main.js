@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Layout, Menu } from "antd";
-import { MenuOutlined, AppstoreOutlined } from "@ant-design/icons";
+import {
+  MenuOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet,useNavigate  } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FooterContent from "./Footer/Footer";
 import Modal from "../../HOC/Modal";
+import { LOCAL_STOGARE_TOKEN_NAME } from "../../ultil/systemSettings";
 
 const { Header, Sider, Content } = Layout;
 
 const Main = () => {
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.AuthReducer);
   const [state, setState] = useState({
     collapsed: false,
@@ -39,7 +45,7 @@ const Main = () => {
             <img src="./img/logo.png" alt="logo" />
             <span className="brand-text">Quản lý Tuyến</span>
           </div>
-          <div className="user-panel">
+          {/* <div className="user-panel">
             <div>
               <div className="image">
                 <img
@@ -49,8 +55,32 @@ const Main = () => {
               </div>
               <div className="info">{user?.username}</div>
             </div>
-          </div>
-
+          </div> */}
+          <Menu mode="vertical" className="userSection">
+            <SubMenu
+              key="sub4"
+              icon={
+                <div className="user-panel">
+                  <div>
+                    <div className="image">
+                      <img
+                        src={`https://ui-avatars.com/api/?name=${user?.username}`}
+                        alt="avatar"
+                      />
+                    </div>
+                    <div className="info">{user?.username}</div>
+                  </div>
+                </div>
+              }
+              mode="vertical"
+            >
+              <Menu.Item key="9" onClick={()=>{
+                localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
+                navigate("/login");
+              }}>Logout</Menu.Item>
+              <Menu.Item key="10">Quản lý nhân viên</Menu.Item>
+            </SubMenu>
+          </Menu>
           <Menu mode="inline" defaultSelectedKeys={null}>
             <Menu.Item key="1">
               <Link to="/dashboard" key="1">
@@ -76,6 +106,7 @@ const Main = () => {
               </Menu.Item>
             </SubMenu>
           </Menu>
+         
         </Sider>
         <Layout>
           <Header>
@@ -92,7 +123,6 @@ const Main = () => {
         </Layout>
       </Layout>
       <Modal />
-
     </>
   );
 };

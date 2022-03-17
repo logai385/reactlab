@@ -163,7 +163,7 @@ export default function RegisterLine() {
                       handleClickADD();
                     }}
                   >
-                    <i class="fa fa-plus"></i>
+                    <i className="fa fa-plus"></i>
                   </button>
                 </div>
               </div>

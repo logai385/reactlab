@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { DeleteTwoTone } from "@ant-design/icons";
 import {
   deleteDocumentAct,
@@ -18,7 +18,7 @@ export default function SignDocument() {
   const documentList = useSelector(
     (state) => state.DocumentReducer.documentList
   );
-  const visible = useSelector((state) => state.ModalReducer.visible);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -175,13 +175,18 @@ export default function SignDocument() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  <button
+                  {/* <button
                     className="btn btn-primary"
                     type="button"
                     onClick={handleClickADD}
+                  
+                    
                   >
-                    <i class="fa fa-plus"></i>
-                  </button>
+                    <i className="fa fa-plus"></i>
+                  </button> */}
+                  <Link to="/document/add" className="btn btn-primary">
+                    <i className="fa fa-plus"></i>
+                  </Link>
                 </div>
               </div>
             </div>

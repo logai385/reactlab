@@ -27,6 +27,10 @@ const LineForm = (props) => {
   const handleChangeStatus = () => {
     setFieldValue("status", !values.status);
   };
+  const handleUserChange = (value) => {
+    setFieldValue("user", value);
+  }
+  
   const renderOperatorOption = () => {
     return operatorList.map((operator, index) => (
       <Option key={index} value={operator._id}>
@@ -86,7 +90,7 @@ const LineForm = (props) => {
                         size="large"
                         style={{ width: "100%" }}
                         value={values.user}
-                        // onChange={handleTransporterChange}
+                        onChange={handleUserChange}
                       >
                         {renderOperatorOption()}
                       </Select>

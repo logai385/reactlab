@@ -1,4 +1,5 @@
 import { call, put, takeLatest, delay, select } from "redux-saga/effects";
+import { toast } from 'react-toastify';
 import LineService from "../../services/LineService";
 import { HIDE_MODAL } from "../modal/ModalConst";
 import { setLineByUserAct, setLineListAct } from "./LineAction";
@@ -36,6 +37,8 @@ function* addLineApi(action) {
   try {
     const { data, status } = yield call(LineService.addNewLine, action.line);
     if (data.success) {
+      toast.success("Thêm tuyến thành công");
+
       yield put({type:GET_LINE_LIST_API});
       yield delay(300);
 
@@ -49,6 +52,9 @@ function* updateLineApi(action) {
     const { data, status } = yield call(LineService.updateLine, action.line);
     
     if (data.success) {
+      toast.success("Update tuyến thành công");
+
+
       yield put({type:GET_LINE_LIST_API});
       yield delay(300);
 

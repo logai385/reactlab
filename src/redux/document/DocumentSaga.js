@@ -1,8 +1,9 @@
-import { put, takeLatest, call, select, delay } from "redux-saga/effects";
+import { put, takeLatest, call, delay } from "redux-saga/effects";
 import DocumentServices from "../../services/DocumentServices";
 
 import {
   ADD_DOCUMENT_API,
+  ADD_SUCCESS,
   DELETE_DOCUMENT_API,
   GET_DOCUMENT_LIST_API
 } from "./DocumentConst";
@@ -23,17 +24,16 @@ function* getDocumentListApi() {
 
 function* addDocumentApi(action) {
   try {
+    
     const { data, status } = yield call(() => {
       return DocumentServices.addDocument(action.payload);
     });
 
     // let history = yield select((state) => state.RouteReducer.history);
     if (data.success) {
-     console.log("success");
+     
     }
-    if (data.success === false) {
-   
-    }
+
   } catch (error) {
     console.log(error.message);
   }
