@@ -17,14 +17,11 @@ export default function RegisterLine() {
   const dispatch = useDispatch();
   // const history = useHistory();
   useEffect(() => {
-    getLineList();
-    console.log(lineList);
+    dispatch(getLineListAct());        
     return () => {};
   }, []);
   // action
-  const getLineList = () => {
-    dispatch(getLineListAct());
-  };
+
   const editeLine = (line) => {
     const lineEdit = { ...line, user: line.user._id };
     dispatch(setEditLineAct(lineEdit));
@@ -33,7 +30,7 @@ export default function RegisterLine() {
   const delLine = (id) => {
     dispatch(deleteLineAct(id));
   };
-  const pushToAdd = () => {
+  const handleClickADD = () => {
     const line = {
       id: "",
       lineNumber: 1,
@@ -163,7 +160,7 @@ export default function RegisterLine() {
                     className="btn btn-primary"
                     type="button"
                     onClick={() => {
-                      pushToAdd();
+                      handleClickADD();
                     }}
                   >
                     <i class="fa fa-plus"></i>

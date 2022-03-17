@@ -3,6 +3,12 @@ import { API_URL } from '../ultil/systemSettings';
 
 class transporterService{
     constructor(){}
+    getTransporterByLine=(id)=>{
+        return Axios({
+            url: `${API_URL}/transporters/getbyline/${id}`,
+            method: 'GET',
+        })
+    }
     getTransporterList=()=>{
         return Axios({
             url: `${API_URL}/transporters`,

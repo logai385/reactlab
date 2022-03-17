@@ -1,13 +1,27 @@
 import { call, put, takeLatest, delay, select } from "redux-saga/effects";
 import LineService from "../../services/LineService";
 import { HIDE_MODAL } from "../modal/ModalConst";
-import { setLineListAct } from "./LineAction";
+import { setLineByUserAct, setLineListAct } from "./LineAction";
 import {
   ADD_LINE_API,
   DELETE_LINE_API,
+  GET_LINE_BY_USER_API,
   GET_LINE_LIST_API,
   POST_LINE_API,
+  
 } from "./LineConst";
+
+function* getLineByUserApi() {
+  try {
+    const { data, status } = yield call(LineService.getLineByUser);
+ 
+    if (data.success) {      
+      yield put(setLineByUserAct(data.lines));
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 function* getLineListApi() {
   try {
     const { data, status } = yield call(LineService.getLineList);
@@ -23,9 +37,10 @@ function* addLineApi(action) {
     const { data, status } = yield call(LineService.addNewLine, action.line);
     if (data.success) {
       yield put({type:GET_LINE_LIST_API});
+      yield delay(300);
+
       yield put({type:HIDE_MODAL});
 
-      yield delay(300);
     }
   } catch (error) {}
 }
@@ -35,6 +50,8 @@ function* updateLineApi(action) {
     
     if (data.success) {
       yield put({type:GET_LINE_LIST_API});
+      yield delay(300);
+
       yield put({type:HIDE_MODAL});
 
     }
@@ -55,5 +72,6 @@ function* LineSaga() {
   yield takeLatest(ADD_LINE_API, addLineApi);
   yield takeLatest(POST_LINE_API, updateLineApi);
   yield takeLatest(DELETE_LINE_API, deleteLineApi);
+  yield takeLatest(GET_LINE_BY_USER_API, getLineByUserApi);
 }
 export default LineSaga;

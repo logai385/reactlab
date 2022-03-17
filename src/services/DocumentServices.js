@@ -22,6 +22,7 @@ var DocumentService ={
             url: `${API_URL}/sign/documents`,
             method: 'POST',
             data: data,            
+            // headers: {'content-type': 'multipart/form-data'}
         })
     },
     // updateDocument=(id,data)=>{

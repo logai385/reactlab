@@ -4,7 +4,7 @@ import DocumentServices from "../../services/DocumentServices";
 import {
   ADD_DOCUMENT_API,
   DELETE_DOCUMENT_API,
-  GET_DOCUMENT_LIST_API,
+  GET_DOCUMENT_LIST_API
 } from "./DocumentConst";
 
 import { setDocumentList } from "./DocumentAction";
@@ -24,12 +24,12 @@ function* getDocumentListApi() {
 function* addDocumentApi(action) {
   try {
     const { data, status } = yield call(() => {
-      return DocumentServices.addDocument(action.data);
+      return DocumentServices.addDocument(action.payload);
     });
 
-    let history = yield select((state) => state.RouteReducer.history);
+    // let history = yield select((state) => state.RouteReducer.history);
     if (data.success) {
-     
+     console.log("success");
     }
     if (data.success === false) {
    

@@ -1,6 +1,5 @@
-import { Button, Input, InputNumber, Select, Space, Set } from "antd";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Button, Input, Select } from "antd";
+import React, { useEffect} from "react";
 import { CheckSquareTwoTone, CloseSquareTwoTone } from "@ant-design/icons";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { addLineAct, postLineAct } from "../../redux/line/LineAction";
@@ -143,7 +142,7 @@ const LineFormik = withFormik({
     lineNumber: Yup.number().required("Nhập số tuyến!"),
   }),
   handleSubmit: (values, { props }) => {
-    console.log(values);
+    
    if (values.id!=='') {
       props.dispatch(postLineAct(values));
     }

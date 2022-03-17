@@ -4,7 +4,8 @@ import { SET_DOCUMENT_EDITING, SET_DOCUMENT_LIST } from "./DocumentConst";
 const initialState = {
   documentList: [],
   editingDocument: {
-    dateSign: Date.now(),
+    id: "",
+    dateSign: "",
     line: null,
     transporter: null,
     quantity: 0,

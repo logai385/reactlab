@@ -5,6 +5,7 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import {
   deleteDocumentAct,
   getDocumentsAct,
+  setEditingDocumentAct,
 } from "../../redux/document/DocumentAction";
 import { Button, Space, Table, Tag } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
@@ -19,9 +20,7 @@ export default function SignDocument() {
   );
   const visible = useSelector((state) => state.ModalReducer.visible);
   const dispatch = useDispatch();
-  const showModal = () => {
-    dispatch({ type: SHOW_MODAL });
-  };
+
   useEffect(() => {
     getDocumentList();
 
@@ -39,23 +38,36 @@ export default function SignDocument() {
   const handleDelete = (id) => {
     dispatch(deleteDocumentAct(id));
   };
+  const handleClickADD = () => {
+    const document = {
+      id: "",
+      dateSign: "",
+      line: null,
+      transporter: null,
+      quantity: 0,
+      documentImg: null,
+    };
+
+    dispatch(setEditingDocumentAct(document));
+    dispatch(openFormEdit(<SignDocumentForm />));
+  };
   const renderDocumentList = () => {
     const columns = [
       {
         title: "#",
         dataIndex: "#",
         key: "#",
-        width:"10%",
+        width: "10%",
       },
       {
         title: "Ngày",
-        dataIndex: "Ngày",
-        key: "Ngày",
+        dataIndex: "date",
+        key: "date",
       },
       {
         title: "Biển Số",
-        dataIndex: "Biển Số",
-        key: "Biển Số",
+        dataIndex: "plate",
+        key: "plate",
         render: (plate) => (
           <Tag color="geekblue" key={plate}>
             {plate}
@@ -73,9 +85,14 @@ export default function SignDocument() {
         ),
       },
       {
+        title: "Số chuyến",
+        dataIndex: "quantity",
+        key: "quantity",
+      },
+      {
         title: "File",
-        dataIndex: "File",
-        key: "File",
+        dataIndex: "file",
+        key: "file",
         render: (text) => (
           <a
             href={`${URL_STATIC}/${text}`}
@@ -88,9 +105,9 @@ export default function SignDocument() {
       },
       {
         title: "Action",
-        key: "id",
-        fixed: 'right',
-        width:"10%",
+
+        fixed: "right",
+        width: "10%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
@@ -114,16 +131,24 @@ export default function SignDocument() {
     const dataSource = documentList.map((document, index) => {
       return {
         "#": index + 1,
-        Ngày: formatDate(document.dateSign),
-        "Biển Số": document.transporter?.plate,
+        date: formatDate(document.dateSign),
+        plate: document.transporter?.plate,
         Line: document.line?.lineNumber,
-
-        File: document.documentImg,
+        quantity: document.quantity,
+        file: document.documentImg,
         id: document._id,
       };
     });
 
-    return <Table rowKey="id" dataSource={dataSource} columns={columns}  size="small"  scroll={{ x: 768}}/>;
+    return (
+      <Table
+        rowKey="id"
+        dataSource={dataSource}
+        columns={columns}
+        size="small"
+        scroll={{ x: 768 }}
+      />
+    );
   };
 
   return (
@@ -150,12 +175,11 @@ export default function SignDocument() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  <button className="btn btn-primary" type="button" onClick={()=>{
-                    dispatch(openFormEdit(
-                      <SignDocumentForm/>
-                    ))
-                    // showModal()
-                  }}>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleClickADD}
+                  >
                     <i class="fa fa-plus"></i>
                   </button>
                 </div>

@@ -2,6 +2,12 @@ import Axios from "axios";
 import { API_URL } from "../ultil/systemSettings";
 
 var LineService = {
+  getLineByUser: () => {
+    return Axios({
+      url: `${API_URL}/lines/getlinebyuser`,
+      method: "GET",
+    });
+  },
   getLineList: () => {
     return Axios({
       url: `${API_URL}/lines`,

@@ -1,14 +1,17 @@
-import { Button, Space, Table, Tag } from "antd";
+import { Space, Table, Tag } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { SET_EDITING_TRANSPORTER } from "../../redux/transporter/TransporterConst";
+
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import {
   deleteTransporterAct,
   getTransporterListAct,
+  setEditingTransporterAct,
 } from "../../redux/transporter/TransporterAction";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
+import { openFormEdit } from "../../redux/modal/ModalAction";
+import TransporterForm from "./TransporterForm";
+
 
 export default function Transporter() {
   const dispatch = useDispatch();
@@ -27,24 +30,24 @@ export default function Transporter() {
     dispatch(deleteTransporterAct(id));
   };
 
-  const handleEditTransporter = (transporter) => {
-    dispatch({
-      type: SET_EDITING_TRANSPORTER,
-      transporter: transporter,
-    });
-    <Navigate to="/buses/edit" />;
+  const handleEditTransporter = (transporter) => {    
+    const mainLines=transporter.mainLines.map(line=>line._id)
+    const minorLines=transporter.minorLines.map(line=>line._id)
+    const transporterEdit = { ...transporter, mainLines, minorLines };
+    dispatch(setEditingTransporterAct(transporterEdit));
+    dispatch(openFormEdit(<TransporterForm />));
   };
   const handleClickADD = () => {
-    dispatch({
-      type: SET_EDITING_TRANSPORTER,
-      transporter: {
-        id: "",
-        plate: "",
-        mainLines: [],
-        minorLines: [],
-      },
-    });
-    <Navigate to="/buses/edit" />;
+    const transporter = {
+      id: "",
+      plate: "",
+      mainLines: [],
+      minorLines: [],
+    };
+
+    dispatch(setEditingTransporterAct(transporter));
+    dispatch(openFormEdit(<TransporterForm />));
+    
   };
   const renderTransporterList = () => {
     const columns = [
@@ -130,7 +133,7 @@ export default function Transporter() {
         plate: plate,
         mainLines: mainLines,
         minorLines: minorLines,
-        _id: _id,
+        id: _id,
       };
     });
 
@@ -171,9 +174,7 @@ export default function Transporter() {
                     className="btn btn-primary"
                     type="button"
                     onClick={() => {
-                      // dispatch(openFormEdit(
-                      //   <SignDocumentForm/>
-                      // ))
+                      handleClickADD();
                     }}
                   >
                     <i class="fa fa-plus"></i>
