@@ -6,7 +6,7 @@ import {
   getLineListAct,
   setEditLineAct,
 } from "../../redux/line/LineAction";
-import { Space, Table, Tag } from "antd";
+import { Popconfirm, Space, Table, Tag } from "antd";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 import LineForm from "./LineForm";
@@ -17,7 +17,7 @@ export default function RegisterLine() {
   const dispatch = useDispatch();
   // const history = useHistory();
   useEffect(() => {
-    dispatch(getLineListAct());        
+    dispatch(getLineListAct());
     return () => {};
   }, []);
   // action
@@ -48,7 +48,7 @@ export default function RegisterLine() {
         title: "#",
         dataIndex: "index",
         key: "index",
-        width: "10%",
+        width: "7%",
       },
       {
         title: "Nhân viên",
@@ -87,18 +87,24 @@ export default function RegisterLine() {
         title: "Action",
         key: "id",
         fixed: "right",
-        width: "10%",
+        width: "7%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => {
+              <Popconfirm
+                placement="topRight"
+                title="Bạn có chắc chắn muốn xóa?"
+                onConfirm={() => {
                   delLine(record.id);
                 }}
+                okText="Yes"
+                cancelText="No"
               >
-                <DeleteTwoTone twoToneColor="#eb2f96" />
-              </span>
+                <span style={{ cursor: "pointer" }}>
+                  <DeleteTwoTone twoToneColor="#eb2f96" />
+                </span>
+              </Popconfirm>
+              
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {

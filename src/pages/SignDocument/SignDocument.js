@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DeleteTwoTone } from "@ant-design/icons";
 import {
   deleteDocumentAct,
   getDocumentsAct,
-  setEditingDocumentAct,
+  // setEditingDocumentAct,
 } from "../../redux/document/DocumentAction";
-import { Button, Space, Table, Tag } from "antd";
+import {  Popconfirm, Space, Table, Tag } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
-import { SHOW_MODAL } from "../../redux/modal/ModalConst";
-import { openFormEdit } from "../../redux/modal/ModalAction";
-import SignDocumentForm from "./SignDocumentForm";
+
+// import { openFormEdit } from "../../redux/modal/ModalAction";
+// import SignDocumentForm from "./SignDocumentForm";
 
 export default function SignDocument() {
   const documentList = useSelector(
@@ -38,41 +38,31 @@ export default function SignDocument() {
   const handleDelete = (id) => {
     dispatch(deleteDocumentAct(id));
   };
-  const handleClickADD = () => {
-    const document = {
-      id: "",
-      dateSign: "",
-      line: null,
-      transporter: null,
-      quantity: 0,
-      documentImg: null,
-    };
+  // const handleClickADD = () => {
+  //   const document = {
+  //     id: "",
+  //     dateSign: "",
+  //     line: null,
+  //     transporter: null,
+  //     quantity: 0,
+  //     documentImg: null,
+  //   };
 
-    dispatch(setEditingDocumentAct(document));
-    dispatch(openFormEdit(<SignDocumentForm />));
-  };
+  //   dispatch(setEditingDocumentAct(document));
+  //   dispatch(openFormEdit(<SignDocumentForm />));
+  // };
   const renderDocumentList = () => {
     const columns = [
       {
         title: "#",
         dataIndex: "#",
         key: "#",
-        width: "10%",
+        width: "7%",
       },
       {
         title: "Ngày",
         dataIndex: "date",
         key: "date",
-      },
-      {
-        title: "Biển Số",
-        dataIndex: "plate",
-        key: "plate",
-        render: (plate) => (
-          <Tag color="geekblue" key={plate}>
-            {plate}
-          </Tag>
-        ),
       },
       {
         title: "Tuyến",
@@ -84,6 +74,17 @@ export default function SignDocument() {
           </Tag>
         ),
       },
+      {
+        title: "Xe",
+        dataIndex: "plate",
+        key: "plate",
+        render: (plate) => (
+          <Tag color="geekblue" key={plate}>
+            {plate}
+          </Tag>
+        ),
+      },
+      
       {
         title: "Số chuyến",
         dataIndex: "quantity",
@@ -105,20 +106,25 @@ export default function SignDocument() {
       },
       {
         title: "Action",
-
         fixed: "right",
-        width: "10%",
+        width: "7%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => {
+             <Popconfirm
+                placement="topRight"
+                title="Bạn có chắc chắn muốn xóa?"
+                onConfirm={() => {
                   handleDelete(record.id);
                 }}
+                okText="Yes"
+                cancelText="No"
               >
-                <DeleteTwoTone twoToneColor="#eb2f96" />
-              </span>
+                <span style={{ cursor: "pointer" }}>
+                  <DeleteTwoTone twoToneColor="#eb2f96" />
+                </span>
+              </Popconfirm>
+              
               {/* <span>
                 <CheckCircleOutlined size="large" />
               </span> */}

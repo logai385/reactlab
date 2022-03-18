@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { call, put, takeLatest, delay } from "redux-saga/effects";
 import TransporterService from "../../services/TransporterServices";
 import { HIDE_MODAL } from "../modal/ModalConst";
@@ -60,6 +61,7 @@ function* deleteTransporterApi(action) {
     const { id } = action;
     let { data, status } = yield call(TransporterService.deleteTransporter, id);
     if (data.success) {
+      message.success('Xoá thành công');
       yield put({ type: GET_TRANSPORTER_LIST_API });
     }
   } catch (error) {
@@ -74,6 +76,7 @@ function* uppdateTransporterApi(action) {
       transporter
     );
     if (data.success) {
+      message.success('Cập nhật thành công');
       yield put({ type: GET_TRANSPORTER_LIST_API });
       yield delay(300);
       yield put({ type: HIDE_MODAL });

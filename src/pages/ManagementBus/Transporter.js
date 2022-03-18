@@ -1,4 +1,4 @@
-import { Space, Table, Tag } from "antd";
+import { Popconfirm, Space, Table, Tag } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,7 +55,7 @@ export default function Transporter() {
         title: "#",
         dataIndex: "index",
         key: "index",
-        width: "10%",
+        width: "7%",
       },
 
       {
@@ -99,18 +99,24 @@ export default function Transporter() {
         title: "Action",
         key: "_id",
         fixed: "right",
-        width: "10%",
+        width: "7%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  deleteTransporter(record._id);
+            <Popconfirm
+                placement="topRight"
+                title="Bạn có chắc chắn muốn xóa?"
+                onConfirm={() => {
+                  deleteTransporter(record.id);
                 }}
+                okText="Yes"
+                cancelText="No"
               >
-                <DeleteTwoTone twoToneColor="#eb2f96" />
-              </span>
+                <span style={{ cursor: "pointer" }}>
+                  <DeleteTwoTone twoToneColor="#eb2f96" />
+                </span>
+              </Popconfirm>
+            
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {

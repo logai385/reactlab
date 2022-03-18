@@ -9,7 +9,7 @@ import Line from "./pages/Line/Line";
 import Transporter from "./pages/ManagementBus/Transporter";
 import SignDocument from "./pages/SignDocument/SignDocument";
 import SignDocumentAdd from "./pages/SignDocument/SignDocumentAdd";
-import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
     <>
@@ -31,7 +31,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      <ToastContainer />
+      
     </>
   );
 }

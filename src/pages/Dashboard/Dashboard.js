@@ -187,14 +187,14 @@ const Dashboard = (props) => {
       <MainBreadcrumb contentTitle="Dashboard" />
       <div className="container-fluid">
       <div className="row">
-        <div className="col-md-6 col-12" style={{ height: "40vh" }}>
+        <div className="col-md-6 col-12" style={{  height: "40vh" }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
               margin={{
                 top: 5,
-                right: 30,
-                left: 20,
+                right: 10,
+                left: 10,
                 bottom: 5,
               }}
               barSize={20}
@@ -212,7 +212,7 @@ const Dashboard = (props) => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="col-12 col-md-6" style={{ height: "40vh" }}>
+        <div className="col-12 col-md-6" style={{ height: "40vh"}}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -235,14 +235,14 @@ const Dashboard = (props) => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="col-md-6 col-12" style={{ height: "40vh" }}>
+        <div className="col-md-6 col-12" style={{ height: "40vh"}}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data3}
               margin={{
                 top: 5,
-                right: 30,
-                left: 20,
+                right: 10,
+                left: 10,
                 bottom: 5,
               }}
             >
@@ -261,11 +261,11 @@ const Dashboard = (props) => {
         <div className="col-md-6 col-12" style={{ height: "40vh" }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data}
+              data={data4}
               margin={{
                 top: 5,
-                right: 30,
-                left: 20,
+                right: 10,
+                left: 10,
                 bottom: 5,
               }}
             >
