@@ -4,7 +4,7 @@ import TransporterService from "../../services/TransporterServices";
 import { HIDE_MODAL } from "../modal/ModalConst";
 
 import {
-  getTransporterListAct,
+  
   setTransporterByLineAct,
   setTransporterListAct,
 } from "./TransporterAction";
@@ -18,7 +18,7 @@ import {
 } from "./TransporterConst";
 function* getTransporterByLineApi(action) {
   try {
-    const { data, status } = yield call(()=>{return TransporterService.getTransporterByLine(action.payload)});
+    const { data } = yield call(()=>{return TransporterService.getTransporterByLine(action.payload)});
     
 
     if (data.success) {
@@ -31,7 +31,7 @@ function* getTransporterByLineApi(action) {
 }
 function* getTransporterListApi() {
   try {
-    let { data, status } = yield call(TransporterService.getTransporterList);
+    let { data } = yield call(TransporterService.getTransporterList);
 
     if (data.success) {
       yield put(setTransporterListAct(data.transporters));
@@ -43,7 +43,7 @@ function* getTransporterListApi() {
 function* addTransporteApi(action) {
   try {
     const { transporter } = action;
-    let { data, status } = yield call(
+    let { data } = yield call(
       TransporterService.addTransporter,
       transporter
     );
@@ -59,7 +59,7 @@ function* addTransporteApi(action) {
 function* deleteTransporterApi(action) {
   try {
     const { id } = action;
-    let { data, status } = yield call(TransporterService.deleteTransporter, id);
+    let { data } = yield call(TransporterService.deleteTransporter, id);
     if (data.success) {
       message.success('Xoá thành công');
       yield put({ type: GET_TRANSPORTER_LIST_API });
@@ -71,7 +71,7 @@ function* deleteTransporterApi(action) {
 function* uppdateTransporterApi(action) {
   try {
     const { transporter } = action;
-    let { data, status } = yield call(
+    let { data } = yield call(
       TransporterService.uppdateTransporter,
       transporter
     );

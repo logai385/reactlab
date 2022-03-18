@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { ADD_LINE_API, DELETE_LINE_API, GET_LINE_BY_USER_API, GET_LINE_LIST_API, POST_LINE_API, SET_EDIT_LINE, SET_LINE_LIST, SET_USER_LINE } from "./LineConst";
 export const addLineAct = (line) => {
   return {

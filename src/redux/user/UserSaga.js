@@ -5,9 +5,8 @@ import { GET_OPERATOR } from "./UserConst";
 
 function* getOperatorApi() {
   try {
-    const { data, status } = yield call(AuthService.getOperatorUser);
-    if (data.success) {
-      console.log(data);
+    const { data } = yield call(AuthService.getOperatorUser);
+    if (data.success) {      
       yield put(setOperatorAct(data.users));
     }
   } catch (e) {

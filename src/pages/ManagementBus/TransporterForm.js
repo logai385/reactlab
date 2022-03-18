@@ -126,8 +126,7 @@ const TransporterForm = (props) => {
 const TransporterFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
-    const { editingTransporter } = props;
-    console.log(editingTransporter);
+    const { editingTransporter } = props;    
     return {
       id: editingTransporter.id,
       plate: editingTransporter.plate,

@@ -2,13 +2,12 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import AuthService from "../../services/AuthService";
 import setAuthToken from "../../ultil/SetAuthToken";
 import {
-  LOCAL_STOGARE_TOKEN_NAME,
-  STATUS_CODE,
+  LOCAL_STOGARE_TOKEN_NAME,  
 } from "../../ultil/systemSettings";
 import { CHECK_AUTH_API, LOGIN_API, SET_AUTHTOKEN } from "./AuthConst";
 function* loginUser(action) {
   try {
-    const { data, status } = yield call(AuthService.loginUser, action.payload);
+    const { data } = yield call(AuthService.loginUser, action.payload);
 
     if (data.success) {
       localStorage.setItem(LOCAL_STOGARE_TOKEN_NAME, data.accessToken);
@@ -26,7 +25,7 @@ const token = localStorage.getItem(LOCAL_STOGARE_TOKEN_NAME);
     if (token) {
       setAuthToken(token);
       try {
-        const { data, status } =  yield call(AuthService.checkAuth);
+        const { data } =  yield call(AuthService.checkAuth);
         
         if (data.success) {
           yield put({

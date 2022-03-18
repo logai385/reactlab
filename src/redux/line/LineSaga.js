@@ -1,4 +1,4 @@
-import { call, put, takeLatest, delay, select } from "redux-saga/effects";
+import { call, put, takeLatest, delay } from "redux-saga/effects";
 
 import LineService from "../../services/LineService";
 import { HIDE_MODAL } from "../modal/ModalConst";
@@ -15,7 +15,7 @@ import { message } from "antd";
 
 function* getLineByUserApi() {
   try {
-    const { data, status } = yield call(LineService.getLineByUser);
+    const { data } = yield call(LineService.getLineByUser);
  
     if (data.success) {      
       yield put(setLineByUserAct(data.lines));
@@ -26,7 +26,7 @@ function* getLineByUserApi() {
 }
 function* getLineListApi() {
   try {
-    const { data, status } = yield call(LineService.getLineList);
+    const { data } = yield call(LineService.getLineList);
     if (data.success) {
       yield put(setLineListAct(data.lines));
     }
@@ -36,7 +36,7 @@ function* getLineListApi() {
 }
 function* addLineApi(action) {
   try {
-    const { data, status } = yield call(LineService.addNewLine, action.line);
+    const { data } = yield call(LineService.addNewLine, action.line);
     if (data.success) {
       message.success('Thêm tuyến thành công');
 
@@ -50,7 +50,7 @@ function* addLineApi(action) {
 }
 function* updateLineApi(action) {
   try {
-    const { data, status } = yield call(LineService.updateLine, action.line);
+    const { data } = yield call(LineService.updateLine, action.line);
     
     if (data.success) {
       message.success('Cập nhật thành công');
@@ -64,7 +64,7 @@ function* updateLineApi(action) {
 }
 function* deleteLineApi(action) {
   try {
-    const { data, status } = yield call(LineService.deleteLine, action.id);
+    const { data } = yield call(LineService.deleteLine, action.id);
     if (data.success) {
       message.warning('xoá tuyến thành công');
       yield put({

@@ -18,13 +18,9 @@ export default function Transporter() {
   // const history = useHistory();
   const { transporterList } = useSelector((state) => state.TransporterReducer);
   useEffect(() => {
-    getTransporterList();
+    dispatch(getTransporterListAct());
     return () => {};
   }, []);
-
-  const getTransporterList = () => {
-    dispatch(getTransporterListAct());
-  };
 
   const deleteTransporter = (id) => {
     dispatch(deleteTransporterAct(id));
@@ -63,7 +59,7 @@ export default function Transporter() {
         dataIndex: "plate",
         key: "plate",
         render: (plate) => (
-          <Tag color="geekblue" key={plate}>
+          <Tag color="geekblue">
             {plate}
           </Tag>
         ),
@@ -75,7 +71,7 @@ export default function Transporter() {
         render: (lines) =>
           lines.map((line, index) => {
             return (
-              <Tag color="green" key={index}>
+              <Tag color="green" >
                 {line.lineNumber}
               </Tag>
             );
@@ -88,7 +84,7 @@ export default function Transporter() {
         render: (lines) =>
           lines.map((line, index) => {
             return (
-              <Tag color="red" key={index}>
+              <Tag color="red">
                 {line.lineNumber}
               </Tag>
             );
@@ -145,7 +141,7 @@ export default function Transporter() {
 
     return (
       <Table
-        rowKey="_id"
+        rowKey="id"
         dataSource={dataSource}
         columns={columns}
         size="small"

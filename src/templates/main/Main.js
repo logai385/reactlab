@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import {
   MenuOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
+  AppstoreOutlined,  
 } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { Link, Navigate, Outlet,useNavigate  } from "react-router-dom";
+import { Link, Outlet,useNavigate  } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FooterContent from "./Footer/Footer";
 import Modal from "../../HOC/Modal";

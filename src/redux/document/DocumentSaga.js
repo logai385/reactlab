@@ -1,4 +1,4 @@
-import { put, takeLatest, call, delay } from "redux-saga/effects";
+import { put, takeLatest, call} from "redux-saga/effects";
 import DocumentServices from "../../services/DocumentServices";
 
 import {
@@ -11,7 +11,7 @@ import { setDocumentList } from "./DocumentAction";
 
 function* getDocumentListApi() {
   try {
-    let { data, status } = yield call(DocumentServices.getDocumentList);
+    let { data } = yield call(DocumentServices.getDocumentList);
 
     if (data.success) {
       yield put(setDocumentList(data.documentList));
@@ -23,7 +23,7 @@ function* getDocumentListApi() {
 
 function* addDocumentApi(action) {
   try {
-    const { data, status } = yield call(() => {
+    const { data } = yield call(() => {
       return DocumentServices.addDocument(action.payload);
     });
 
@@ -36,7 +36,7 @@ function* addDocumentApi(action) {
 }
 function* deleteDocumentApi(action) {
   try {
-    const { data, status } = yield call(() => {
+    const { data } = yield call(() => {
       return DocumentServices.deleteDocument(action.id);
     });
 
