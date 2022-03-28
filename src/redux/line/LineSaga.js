@@ -37,8 +37,8 @@ function* getLineListApi() {
 }
 function* addLineApi(action) {
   try {
-    const { data } = yield call(LineService.addNewLine, action.line);
-    if (data.success) {
+    const {status } = yield call(LineService.addNewLine, action.line);
+    if (status===STATUS_CODE.CREATED) {
       message.success('Thêm tuyến thành công');
 
       yield put({type:GET_LINE_LIST_API});
@@ -51,9 +51,9 @@ function* addLineApi(action) {
 }
 function* updateLineApi(action) {
   try {
-    const { data } = yield call(LineService.updateLine, action.line);
+    const { status } = yield call(LineService.updateLine, action.line);
     
-    if (data.success) {
+    if (status===STATUS_CODE.SUCCESS) {
       message.success('Cập nhật thành công');
       yield put({type:GET_LINE_LIST_API});
       yield delay(300);
@@ -65,8 +65,8 @@ function* updateLineApi(action) {
 }
 function* deleteLineApi(action) {
   try {
-    const { data } = yield call(LineService.deleteLine, action.id);
-    if (data.success) {
+    const { status } = yield call(LineService.deleteLine, action.id);
+    if (status===STATUS_CODE.SUCCESS) {
       message.warning('xoá tuyến thành công');
       yield put({
         type: GET_LINE_LIST_API,

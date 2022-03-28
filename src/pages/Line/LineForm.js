@@ -143,10 +143,10 @@ const LineFormik = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    lineNumber: Yup.number().required("Nhập số tuyến!"),
+    lineNumber: Yup.string().required("Nhập số tuyến!"),
   }),
   handleSubmit: (values, { props }) => {
-    
+    console.log(values);
    if (values.id!=='') {
       props.dispatch(postLineAct(values));
     }

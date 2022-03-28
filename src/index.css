@@ -213,6 +213,9 @@ html {
   -webkit-animation: shake 1500ms;
   animation: shake 1500ms;
 }
+.anticon{
+  vertical-align: 0.1rem;
+}
 @media (max-width: 767.98px) {
   .ant-drawer-content-wrapper{
     width: 70%!important;

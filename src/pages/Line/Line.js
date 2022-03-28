@@ -23,7 +23,7 @@ export default function RegisterLine() {
   // action
 
   const editeLine = (line) => {
-    const lineEdit = { ...line, user: line.user._id };
+    const lineEdit = { ...line, user: line.user?._id };
     dispatch(setEditLineAct(lineEdit));
     dispatch(openFormEdit(<LineForm />));
   };

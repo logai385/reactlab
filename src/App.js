@@ -9,15 +9,14 @@ import Line from "./pages/Line/Line";
 import Transporter from "./pages/ManagementBus/Transporter";
 import SignDocument from "./pages/SignDocument/SignDocument";
 import SignDocumentAdd from "./pages/SignDocument/SignDocumentAdd";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch, } from "react-redux";
+
 
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: "SET_HITORY", payload: navigate });
-  }, []);
+  dispatch({ type: "SET_HITORY", payload: navigate });
+
   return (
     <>
       <Routes>
