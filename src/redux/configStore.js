@@ -7,6 +7,7 @@ import TransporterReducer from "./transporter/TransporterReducer";
 import DocumentReducer from "./document/DocumentReducer";
 import ModalReducer from "./modal/ModalReducer";
 import UserReducer from "./user/UserReducer";
+import NavigateReducer from "./navigate/NavigateReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     TransporterReducer,
     DocumentReducer,
     ModalReducer,
-    UserReducer
+    UserReducer,
+    NavigateReducer
 });
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);

@@ -12,13 +12,14 @@ import {
   
 } from "./LineConst";
 import { message } from "antd";
+import { STATUS_CODE } from "../../ultil/systemSettings";
 
 function* getLineByUserApi() {
   try {
-    const { data } = yield call(LineService.getLineByUser);
+    const { data,status } = yield call(LineService.getLineByUser);
  
-    if (data.success) {      
-      yield put(setLineByUserAct(data.lines));
+    if (status===STATUS_CODE.SUCCESS) {      
+      yield put(setLineByUserAct(data));
     }
   } catch (error) {
     console.log(error.message);
@@ -26,9 +27,9 @@ function* getLineByUserApi() {
 }
 function* getLineListApi() {
   try {
-    const { data } = yield call(LineService.getLineList);
-    if (data.success) {
-      yield put(setLineListAct(data.lines));
+    const { data,status } = yield call(LineService.getLineList);
+    if (status===STATUS_CODE.SUCCESS) {     
+      yield put(setLineListAct(data));
     }
   } catch (error) {
     console.log(error.message);

@@ -34,8 +34,8 @@ export const Login = () => {
     <section className="login">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-5 login__left"></div>
-          <div className="col-12 col-sm-7 login__right">
+          <div className="col-sm-6 login__left"></div>
+          <div className="col-12 col-sm-6 login__right">
             <form className="form " onSubmit={handleSubmit}>
               <h1 className="text-center display-3">Login</h1>
               <div className="form-group my-5">

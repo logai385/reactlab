@@ -1,44 +1,14 @@
-import Axios from 'axios';
-import { API_URL } from '../ultil/systemSettings';
+import { BaseService } from './BaseService';
 
-var DocumentService ={
+class documentService extends BaseService{
     
-    getDocumentList:()=>{
-        return Axios({
-            url: `${API_URL}/sign/documents`,
-            method: 'GET',
-        })
-    },
-    // getDocumentById=(id)=>{
-    //     return Axios({
-    //         url: `${DOMAIN}/api/qlnv/documents/${id}`,
-    //         method: 'GET',
-    //     })
-    // }
-    addDocument:(data)=>{
-        // console.log(data);
-       
-        return Axios({
-            url: `${API_URL}/sign/documents`,
-            method: 'POST',
-            data: data,            
-            // headers: {'content-type': 'multipart/form-data'}
-        })
-    },
-    // updateDocument=(id,data)=>{
-    //     return Axios({
-    //         url: `${DOMAIN}/api/qlnv/documents/${id}`,
-    //         method: 'PUT',
-    //         data: data,
-    //     })
-    // }
-    deleteDocument:(id)=>{
-        return Axios({
-            url: `${API_URL}/sign/documents/${id}`,
-            method: 'DELETE',
-        })
-    }
-}
+    getDocumentList=()=> this.get(`documents`);
 
+    addDocument=(data)=> this.post(`documents`,data);
+
+    deleteDocument=(id)=>this.delete(`documents/${id}`)
+           
+}
+const DocumentService = new documentService();
 
 export default DocumentService;
