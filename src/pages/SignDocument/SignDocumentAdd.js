@@ -6,6 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 import { getLineByUserAct } from "../../redux/line/LineAction";
 import { getTransporterByLineAct } from "../../redux/transporter/TransporterAction";
 import { addSignDocumentAct } from "../../redux/document/DocumentAction";
+
 const { Option } = Select;
 const SignDocumentAdd = () => {
   const dispatch = useDispatch();
@@ -47,8 +48,9 @@ const SignDocumentAdd = () => {
     dispatch(getTransporterByLineAct(value));
   };
   const handleChangeFile = (e) => {
-    const file = e.target.files[0];
-    setSignDocument({ ...signDocument, documentImg: file });
+    // const files = e.target.files;
+    // setSignDocument({ ...signDocument, documentImg: files });
+    console.log(e)
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +71,7 @@ const SignDocumentAdd = () => {
 
     return () => {};
   }, []);
+
   return (
     <>
       <div className="content-wrapper">
@@ -139,7 +142,9 @@ const SignDocumentAdd = () => {
                   type="file"
                   name="documentImg"
                   onChange={handleChangeFile}
+                  multiple
                 ></Input>
+                
               </div>
               <div className=" text-right">
                 <Space>
