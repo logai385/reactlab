@@ -71,7 +71,7 @@ export default function Transporter() {
         render: (lines) =>
           lines.map((line, index) => {
             return (
-              <Tag color="green" >
+              <Tag color="green"  key={index}>
                 {line.lineNumber}
               </Tag>
             );
@@ -84,7 +84,7 @@ export default function Transporter() {
         render: (lines) =>
           lines.map((line, index) => {
             return (
-              <Tag color="red">
+              <Tag color="red" key={index}>
                 {line.lineNumber}
               </Tag>
             );

@@ -3,38 +3,38 @@ import { call, put, takeLatest, delay } from "redux-saga/effects";
 import TransporterService from "../../services/TransporterServices";
 import { HIDE_MODAL } from "../modal/ModalConst";
 
+
 import {
-  
   setTransporterByLineAct,
   setTransporterListAct,
 } from "./TransporterAction";
+import { STATUS_CODE } from "../../ultil/systemSettings";
 
 import {
   ADD_TRANSPORTER_API,
-  DELETE_TRANSPORTER_API,  
+  DELETE_TRANSPORTER_API,
   GET_TRANSPORTER_BY_LINE_API,
   GET_TRANSPORTER_LIST_API,
   UPDATE_TRANSPORTER_API,
 } from "./TransporterConst";
 function* getTransporterByLineApi(action) {
   try {
-    const { data } = yield call(()=>{return TransporterService.getTransporterByLine(action.payload)});
-    
+    const { data, status } = yield call(() => {
+      return TransporterService.getTransporterByLine(action.payload);
+    });
 
-    if (data.success) {
-      yield put(setTransporterByLineAct(data.transporters));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put(setTransporterByLineAct(data));
     }
   } catch (error) {
     console.error(error.message);
-
   }
 }
 function* getTransporterListApi() {
   try {
-    let { data } = yield call(TransporterService.getTransporterList);
-
-    if (data.success) {
-      yield put(setTransporterListAct(data.transporters));
+    let { data, status } = yield call(TransporterService.getTransporterList);    
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put(setTransporterListAct(data));
     }
   } catch (error) {
     console.log(error.message);
@@ -43,11 +43,13 @@ function* getTransporterListApi() {
 function* addTransporteApi(action) {
   try {
     const { transporter } = action;
-    let { data } = yield call(
-      TransporterService.addTransporter,
-      transporter
-    );
-    if (data.success) {
+    let {status} = yield call(() => {
+      return TransporterService.addTransporter(transporter);
+    });
+    
+    if (status === STATUS_CODE.CREATED) {
+      message.success('Thêm xe thành công');
+
       yield put({ type: GET_TRANSPORTER_LIST_API });
       yield delay(300);
       yield put({ type: HIDE_MODAL });
@@ -59,9 +61,9 @@ function* addTransporteApi(action) {
 function* deleteTransporterApi(action) {
   try {
     const { id } = action;
-    let { data } = yield call(TransporterService.deleteTransporter, id);
-    if (data.success) {
-      message.success('Xoá thành công');
+    let { data, status } = yield call(TransporterService.deleteTransporter, id);
+    if (status === STATUS_CODE.SUCCESS) {
+      message.success("Xoá thành công");
       yield put({ type: GET_TRANSPORTER_LIST_API });
     }
   } catch (error) {
@@ -71,20 +73,22 @@ function* deleteTransporterApi(action) {
 function* uppdateTransporterApi(action) {
   try {
     const { transporter } = action;
-    let { data } = yield call(
+    let { data, status } = yield call(
       TransporterService.uppdateTransporter,
       transporter
     );
-    if (data.success) {
-      message.success('Cập nhật thành công');
+    if (status === STATUS_CODE.SUCCESS) {
+      message.success("Cập nhật thành công");
       yield put({ type: GET_TRANSPORTER_LIST_API });
       yield delay(300);
       yield put({ type: HIDE_MODAL });
     } else {
-      // Notification("error", "Cập nhật thất bại", data.message);
+      message.error("Cập nhật thất bại");
+
     }
-  } catch (error) {
-    console.log(error.message);
+  } catch (error) {    
+    message.error("Cập nhật thất bại");
+
   }
 }
 

@@ -29,8 +29,7 @@ function* checkAuth(action) {
     try {
       const { data, status } = yield call(AuthService.checkAuth);
 
-      if (status === STATUS_CODE.SUCCESS) {
-        console.log(data);
+      if (status === STATUS_CODE.SUCCESS) {        
         yield put({
           type: SET_AUTHTOKEN,
           payload: {

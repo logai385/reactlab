@@ -1,4 +1,5 @@
-class transporterService{
+import { BaseService } from "./BaseService";
+class transporterService extends BaseService{
     getTransporterByLine=(id)=>this.get(`transporters/getbyline/${id}`)
     getTransporterList=()=>this.get('transporters')
     deleteTransporter=(id)=>this.delete(`transporters/${id}`)

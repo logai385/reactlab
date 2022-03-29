@@ -33,11 +33,6 @@ const TransporterForm = (props) => {
 
     return () => {};
   }, []);
-  // const handleNameChange = (e) => {
-  //   // console.log(e);
-  //   let { value } = e.target;
-  //   value = value.toUpperCase().replace(/[^A-Z0-9]/, "");
-  // };
 
   const renderLineList = () => {
     return lineList.map((line, index) => {
@@ -78,6 +73,7 @@ const TransporterForm = (props) => {
                         style={{ width: "100%" }}
                         name="plate"
                         value={values.plate}
+                        // onChange={handleNameChange}
                       />
                       {errors.plate && touched.plate ? (
                         <p className="text-danger">{errors.plate}</p>
