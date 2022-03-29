@@ -7,7 +7,7 @@ import {
   getDocumentsAct,
   // setEditingDocumentAct,
 } from "../../redux/document/DocumentAction";
-import {  Popconfirm, Space, Table, Tag } from "antd";
+import { Popconfirm, Space, Table, Tag } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 
@@ -84,7 +84,7 @@ export default function SignDocument() {
           </Tag>
         ),
       },
-      
+
       {
         title: "Số chuyến",
         dataIndex: "quantity",
@@ -92,26 +92,32 @@ export default function SignDocument() {
       },
       {
         title: "File",
-        dataIndex: "file",
-        key: "file",
-        render: (text) => (
-          <a
-            href={`${URL_STATIC}/${text}`}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            link
-          </a>
-        ),
+        dataIndex: "files",
+        key: "files",
+        render: (text, record, index) =>
+        <Space size="middle">
+           {record.files.map((file, index) => {
+            return (
+              <a
+                href={`${URL_STATIC}/${file}`}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                link
+              </a>
+            );
+          })}
+        </Space>
+         
       },
       {
-        title: "Action",
+        title: "#",
         fixed: "right",
         width: "7%",
         render: (text, record, index) => {
           return (
             <Space size="middle">
-             <Popconfirm
+              <Popconfirm
                 placement="topRight"
                 title="Bạn có chắc chắn muốn xóa?"
                 onConfirm={() => {
@@ -124,7 +130,7 @@ export default function SignDocument() {
                   <DeleteTwoTone twoToneColor="#eb2f96" />
                 </span>
               </Popconfirm>
-              
+
               {/* <span>
                 <CheckCircleOutlined size="large" />
               </span> */}
@@ -141,7 +147,7 @@ export default function SignDocument() {
         plate: document.transporter?.plate,
         Line: document.line?.lineNumber,
         quantity: document.quantity,
-        file: document.documentImg,
+        files: document.documentImg,
         id: document._id,
       };
     });

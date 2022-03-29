@@ -21,7 +21,7 @@ const SignDocumentAdd = () => {
     transporter: "",
     line: "",
     quantity: 0,
-    documentImg: "",
+    documentImg: [],
   });
   const renderLineOption = () => {
     return userLine.map((line, index) => (
@@ -48,9 +48,12 @@ const SignDocumentAdd = () => {
     dispatch(getTransporterByLineAct(value));
   };
   const handleChangeFile = (e) => {
-    // const files = e.target.files;
-    // setSignDocument({ ...signDocument, documentImg: files });
-    console.log(e)
+    const file = e.target.files[0];
+    let newfile = signDocument.documentImg;
+    newfile.splice(0,0,file);
+    if(newfile.length>2) newfile=newfile.slice(0,2);
+    setSignDocument({ ...signDocument, documentImg: newfile });
+
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,8 +61,11 @@ const SignDocumentAdd = () => {
     formData.append("dateSign", signDocument.dateSign);
     formData.append("transporter", signDocument.transporter);
     formData.append("line", signDocument.line);
-    formData.append("quantity", signDocument.quantity);
-    formData.append("documentImg", signDocument.documentImg);
+    formData.append("quantity", signDocument.quantity);    
+    for(let i=0;i<signDocument.documentImg.length;i++){
+      formData.append("documentImg", signDocument.documentImg[i]);    
+    }
+    // console.log(signDocument.documentImg);
     dispatch(addSignDocumentAct(formData));
   };
   useEffect(() => {
@@ -141,10 +147,16 @@ const SignDocumentAdd = () => {
                   size="large"
                   type="file"
                   name="documentImg"
-                  onChange={handleChangeFile}
-                  multiple
+                  onChange={handleChangeFile} 
+                  className="mb-3"                 
                 ></Input>
                 
+                <Input
+                  size="large"
+                  type="file"
+                  name="documentImg"
+                  onChange={handleChangeFile}                  
+                ></Input>
               </div>
               <div className=" text-right">
                 <Space>
