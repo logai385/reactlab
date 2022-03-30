@@ -55,9 +55,9 @@ const Main = () => {
               <div className="info">{user?.username}</div>
             </div>
           </div> */}
-          <Menu mode="vertical" className="userSection">
+          <Menu mode="vertical" className="userSection" key="menu1">
             <SubMenu
-              key="sub1"
+              key="sub2"
               icon={
                 <div className="user-panel">
                   <div>
@@ -73,11 +73,11 @@ const Main = () => {
               }
               mode="vertical"
             >
-              <Menu.Item key="9" onClick={()=>{
+              <Menu.Item key="sub2_1" onClick={()=>{
                 localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
                 navigate("/login");
               }}>Thoát</Menu.Item>
-              <Menu.Item key="10">
+              <Menu.Item key="sub2_2">
               <Link to="/user" >
                DS nhân viên
               </Link>
@@ -85,7 +85,7 @@ const Main = () => {
               </Menu.Item>
             </SubMenu>
           </Menu>
-          <Menu mode="inline" defaultSelectedKeys={null}>
+          <Menu mode="inline" defaultSelectedKeys={null}  key="menu2">
             <Menu.Item key="1">
               <Link to="/dashboard" key="1">
                 <i className="nav-icon fas fa-tachometer-alt"></i> Dashboard
@@ -93,6 +93,11 @@ const Main = () => {
             </Menu.Item>
 
             <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Quản lý">
+              <Menu.Item key="sub1_4">
+                <Link to="/unit">
+                  <i className="nav-icon fa fa-bus"></i> Đại lý
+                </Link>
+              </Menu.Item>
               <Menu.Item key="sub1_1">
                 <Link to="/line">
                   <i className="nav-icon fa fa-route"></i> Tuyến
@@ -103,7 +108,7 @@ const Main = () => {
                   <i className="nav-icon fa fa-bus-alt"></i> Xe
                 </Link>
               </Menu.Item>
-              <Menu.Item key="6">
+              <Menu.Item key="sub1_3">
                 <Link to="/document">
                   <i className="nav-icon fa fa-file-alt"></i> Giấy phép
                 </Link>

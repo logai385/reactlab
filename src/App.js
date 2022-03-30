@@ -11,6 +11,7 @@ import SignDocument from "./pages/SignDocument/SignDocument";
 import SignDocumentAdd from "./pages/SignDocument/SignDocumentAdd";
 import User from "./pages/User/User";
 import { useDispatch, } from "react-redux";
+import Unit from "./pages/Unit/Unit";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/document/add" element={<SignDocumentAdd />} />
             <Route path="/document" element={<SignDocument />} />
             <Route path="/user" element={<User />} />
+            <Route path="/unit" element={<Unit />} />
           </Route>
         </Route>
       </Routes>
