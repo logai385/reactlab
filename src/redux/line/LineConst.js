@@ -6,3 +6,6 @@ export const ADD_LINE_API = 'ADD_LINE_API';
 export const SET_EDIT_LINE = 'SET_EDIT_LINE';
 export const POST_LINE_API = 'POST_LINE_API';
 export const SET_USER_LINE = 'SET_USER_LINE';
+export const SET_LINE_SEARCH = 'SET_LINE_SEARCH';
+export const GET_LINE_SEARCH = 'GET_LINE_SEARCH';
+export const ASSIGN_USER = 'ASSIGN_USER';

@@ -9,6 +9,7 @@ import Line from "./pages/Line/Line";
 import Transporter from "./pages/ManagementBus/Transporter";
 import SignDocument from "./pages/SignDocument/SignDocument";
 import SignDocumentAdd from "./pages/SignDocument/SignDocumentAdd";
+import User from "./pages/User/User";
 import { useDispatch, } from "react-redux";
 
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/line" element={<Line />} />
             <Route path="/document/add" element={<SignDocumentAdd />} />
             <Route path="/document" element={<SignDocument />} />
+            <Route path="/user" element={<User />} />
           </Route>
         </Route>
       </Routes>

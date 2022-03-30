@@ -10,6 +10,9 @@ class authService extends BaseService {
   getOperatorUser = () => {
     return this.get("auth/users");
   }
+  getOperatorLine = () => {
+    return this.get("auth/getOperatorLine");
+  }
 }
 const AuthService = new authService();
 

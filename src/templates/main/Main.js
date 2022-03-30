@@ -26,7 +26,7 @@ const Main = () => {
     <>
       <Layout className="mainLayout">
         <Sider
-          width="230"
+          width="220"
           className="mainSider"
           trigger={null}
           collapsed={state.collapsed}
@@ -57,17 +57,17 @@ const Main = () => {
           </div> */}
           <Menu mode="vertical" className="userSection">
             <SubMenu
-              key="sub4"
+              key="sub1"
               icon={
                 <div className="user-panel">
                   <div>
                     <div className="image">
                       <img
-                        src={`https://ui-avatars.com/api/?name=${user?.username}`}
+                        src={`https://ui-avatars.com/api/?name=${user?.name}`}
                         alt="avatar"
                       />
                     </div>
-                    <div className="info">{user?.username}</div>
+                    <div className="info">{user?.name}</div>
                   </div>
                 </div>
               }
@@ -76,8 +76,13 @@ const Main = () => {
               <Menu.Item key="9" onClick={()=>{
                 localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
                 navigate("/login");
-              }}>Logout</Menu.Item>
-              <Menu.Item key="10">Quản lý nhân viên</Menu.Item>
+              }}>Thoát</Menu.Item>
+              <Menu.Item key="10">
+              <Link to="/user" >
+               DS nhân viên
+              </Link>
+              
+              </Menu.Item>
             </SubMenu>
           </Menu>
           <Menu mode="inline" defaultSelectedKeys={null}>

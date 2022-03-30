@@ -54,7 +54,7 @@ export default function RegisterLine() {
         title: "Nhân viên",
         dataIndex: "user",
         key: "user",
-        render: (user) => <b>{user?.username}</b>,
+        render: (user) => <b>{user?.name}</b>,
       },
       {
         title: "Số Tuyến",

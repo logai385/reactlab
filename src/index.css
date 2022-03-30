@@ -177,6 +177,9 @@ html {
 .card-body{
   padding: 5px 10px;
 }
+.user__item .card-body{
+  padding: 1.25rem;
+}
 #root{
   height: 100vh;
 }
