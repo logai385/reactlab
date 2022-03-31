@@ -28,9 +28,11 @@ const options = {
   plugins: {
     legend: {
       position: "top",
+    
     },
     title: {
       display: true,
+      align:"start",
       text: "Số chuyến theo Tuyến",
     },
   },
@@ -107,7 +109,7 @@ const Dashboard = (props) => {
               <div className="input-group">
                 <Select
                   name="year"
-                  style={{ width: "13%" }}
+                  // style={{ width: "13%" }}
                   onChange={handleYearChange}
                   className="mr-3"
                   value={queryDate.year}
@@ -116,7 +118,7 @@ const Dashboard = (props) => {
                 </Select>
                 <Select
                   name="month"
-                  style={{ width: "10%" }}
+                  // style={{ width: "10%" }}
                   value={queryDate.month}
                   onChange={handleMonthChange}
                 >
