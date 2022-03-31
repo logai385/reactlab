@@ -222,6 +222,20 @@ html {
 .card-subtitle {
   margin: 0;
 }
+.chart__item{
+  position: relative;
+}
+.chart__item .data__action{
+  position: absolute;
+  top: 0;
+  left  : 0;
+  width: 100%;
+ 
+}
+.chart__item .data__action .input-group{
+  display: flex;
+  justify-content: flex-end;
+}
 @media (max-width: 767.98px) {
   .ant-drawer-content-wrapper{
     width: 70%!important;
