@@ -91,6 +91,11 @@ export default function SignDocument() {
         key: "quantity",
       },
       {
+        title: "Lỡ chuyến",
+        dataIndex: "missQuantity",
+        key: "missQuantity",
+      },
+      {
         title: "File",
         dataIndex: "files",
         key: "files",
@@ -131,9 +136,6 @@ export default function SignDocument() {
                 </span>
               </Popconfirm>
 
-              {/* <span>
-                <CheckCircleOutlined size="large" />
-              </span> */}
             </Space>
           );
         },
@@ -147,6 +149,7 @@ export default function SignDocument() {
         plate: document.transporter?.plate,
         Line: document.line?.lineNumber,
         quantity: document.quantity,
+        missQuantity: document.missQuantity,
         files: document.documentImg,
         id: document._id,
       };
@@ -187,15 +190,7 @@ export default function SignDocument() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-                  {/* <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={handleClickADD}
-                  
-                    
-                  >
-                    <i className="fa fa-plus"></i>
-                  </button> */}
+            
                   <Link to="/document/add" className="btn btn-primary">
                     <i className="fa fa-plus"></i>
                   </Link>
@@ -206,12 +201,7 @@ export default function SignDocument() {
           <div className="row">
             <div className="col-12">
               <div className="card">
-                {/* <div className="card-header">
-                    <h3 className="card-title">
-                      DataTable with default features
-                    </h3>
-                  </div> */}
-                {/* /.card-header */}
+       
                 <div className="card-body">{renderDocumentList()}</div>
                 {/* /.card-body */}
               </div>

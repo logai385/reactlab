@@ -21,6 +21,7 @@ const SignDocumentAdd = () => {
     transporter: "",
     line: "",
     quantity: 0,
+    missQuantity: 0,
     documentImg: [],
   });
   const renderLineOption = () => {
@@ -58,10 +59,11 @@ const SignDocumentAdd = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("dateSign", signDocument.dateSign);
     formData.append("transporter", signDocument.transporter);
+    console.log("dateSign", signDocument.dateSign);
     formData.append("line", signDocument.line);
     formData.append("quantity", signDocument.quantity);    
+    formData.append("missQuantity", signDocument.missQuantity);    
     for(let i=0;i<signDocument.documentImg.length;i++){
       formData.append("documentImg", signDocument.documentImg[i]);    
     }
@@ -137,6 +139,21 @@ const SignDocumentAdd = () => {
                     setSignDocument({
                       ...signDocument,
                       quantity: e.target.value,
+                    });
+                  }}
+                ></Input>
+              </div>
+              <div className="form-group">
+                <label>Số lỡ chuyến </label>
+                <Input
+                  size="large"
+                  type="number"
+                  name="quantity"
+                  value={signDocument.missQuantity}
+                  onChange={(e) => {
+                    setSignDocument({
+                      ...signDocument,
+                      missQuantity: e.target.value,
                     });
                   }}
                 ></Input>
