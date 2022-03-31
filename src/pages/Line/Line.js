@@ -75,7 +75,7 @@ export default function RegisterLine() {
         title: "Đại lý",
         dataIndex: "unit",
         key: "unit",
-        render: (unit) => <b>{unit.name}</b>,
+        render: (unit) => <b>{unit?.name}</b>,
       },            
       {
         title: "Trạng thái",
@@ -90,7 +90,7 @@ export default function RegisterLine() {
       },
 
       {
-        title: "Action",
+        title: "#",
         key: "id",
         fixed: "right",
         width: "7%",

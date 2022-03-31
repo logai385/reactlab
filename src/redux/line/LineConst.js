@@ -9,3 +9,4 @@ export const SET_USER_LINE = 'SET_USER_LINE';
 export const SET_LINE_SEARCH = 'SET_LINE_SEARCH';
 export const GET_LINE_SEARCH = 'GET_LINE_SEARCH';
 export const ASSIGN_USER = 'ASSIGN_USER';
+export const REMOVE_USER = 'REMOVE_USER';

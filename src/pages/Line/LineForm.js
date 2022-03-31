@@ -1,11 +1,11 @@
 import { Button, Input, Select } from "antd";
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { CheckSquareTwoTone, CloseSquareTwoTone } from "@ant-design/icons";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { addLineAct, postLineAct } from "../../redux/line/LineAction";
 import { withFormik } from "formik";
 import * as Yup from "yup";
-import { getOperatorAct } from "../../redux/user/UserAction";
+
 import { setSubmitAct } from "../../redux/modal/ModalAction";
 const { Option } = Select;
 const LineForm = (props) => {
@@ -22,24 +22,11 @@ const LineForm = (props) => {
     handleSubmit,
   } = props;
 
-  const operatorList = useSelector((state) => state.UserReducer.operators);
-
   const handleChangeStatus = () => {
     setFieldValue("status", !values.status);
   };
-  const handleUserChange = (value) => {
-    setFieldValue("user", value);
-  }
-  
-  const renderOperatorOption = () => {
-    return operatorList.map((operator, index) => (
-      <Option key={index} value={operator._id}>
-        {operator.username}
-      </Option>
-    ));
-  };
+
   useEffect(() => {
-    dispatch(getOperatorAct());
     dispatch(setSubmitAct(handleSubmit));
     return () => {};
   }, []);
@@ -83,18 +70,7 @@ const LineForm = (props) => {
                         value={values.description}
                       />
                     </div>
-                    <div className="form-group">
-                      <label>Quản lý bởi</label>
-                      <Select
-                        name="user"
-                        size="large"
-                        style={{ width: "100%" }}
-                        value={values.user}
-                        onChange={handleUserChange}
-                      >
-                        {renderOperatorOption()}
-                      </Select>
-                    </div>
+
                     <Button
                       type="link"
                       className="my-2"
@@ -133,13 +109,13 @@ const LineForm = (props) => {
 const LineFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
-    const { editingLine, operatorList } = props;
+    const { editingLine } = props;
     return {
       id: editingLine.id,
       lineNumber: editingLine.lineNumber,
       description: editingLine.description,
-      user: editingLine.user || operatorList[0]?._id,
-      status: editingLine.status ,
+
+      status: editingLine.status,
     };
   },
   validationSchema: Yup.object().shape({
@@ -147,20 +123,17 @@ const LineFormik = withFormik({
   }),
   handleSubmit: (values, { props }) => {
     console.log(values);
-   if (values.id!=='') {
+    if (values.id !== "") {
       props.dispatch(postLineAct(values));
-    }
-    else {
+    } else {
       props.dispatch(addLineAct(values));
     }
-
   },
 })(LineForm);
 
 const mapStateToProps = (state) => {
   return {
     editingLine: state.LineReducer.editingLine,
-    operatorList: state.UserReducer.operators,
   };
 };
 export default connect(mapStateToProps)(LineFormik);

@@ -4,6 +4,7 @@ class lineService extends BaseService{
   getLineByUser=()=>this.get(`lines/getLineByUser`);
   getLineList=()=>this.get(`lines`);
   assignUser=(data)=>this.post(`lines/assignUser`,data);
+  removeUser=(data)=>this.post(`lines/removeUser`,data);
   addNewLine=(data)=>this.post(`lines`,data);
   updateLine=(data)=>this.put(`lines`,data);
   deleteLine=(id)=>this.delete(`lines/${id}`);

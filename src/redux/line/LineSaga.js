@@ -2,17 +2,16 @@ import { call, put, takeLatest, delay } from "redux-saga/effects";
 
 import LineService from "../../services/LineService";
 import { HIDE_MODAL } from "../modal/ModalConst";
-import { setLineAvaibleAct, setLineByUserAct, setLineListAct, setSearchLineAct } from "./LineAction";
+import { setLineByUserAct, setLineListAct, setSearchLineAct } from "./LineAction";
 import {
   ADD_LINE_API,
   ASSIGN_USER,
   DELETE_LINE_API,
-  GET_LINE_AVAILABLE,
   GET_LINE_BY_USER_API,
   GET_LINE_LIST_API,
   GET_LINE_SEARCH,
   POST_LINE_API,
-  
+  REMOVE_USER,
 } from "./LineConst";
 import { message } from "antd";
 import { STATUS_CODE } from "../../ultil/systemSettings";
@@ -89,7 +88,20 @@ function* deleteLineApi(action) {
 }
 function* assignUserApi(action){
   try {
-    const {data,status} = yield call(LineService.assignUser,action.payload)
+    const {status} = yield call(LineService.assignUser,action.payload)
+    if(status===STATUS_CODE.SUCCESS){
+      message.success('Cập nhật thành công');   
+      yield put({
+        type:GET_OPERATOR_LINE
+      })   
+    }
+  } catch (error) {
+    
+  }
+}
+function* removeUser(action){
+  try {
+    const {status} = yield call(LineService.removeUser,action.payload)
     if(status===STATUS_CODE.SUCCESS){
       message.success('Cập nhật thành công');   
       yield put({
@@ -108,5 +120,6 @@ function* LineSaga() {
   yield takeLatest(GET_LINE_BY_USER_API, getLineByUserApi);
   yield takeLatest(GET_LINE_SEARCH, getLineSearchApi);
   yield takeLatest(ASSIGN_USER, assignUserApi);
+  yield takeLatest(REMOVE_USER, removeUser);
 }
 export default LineSaga;

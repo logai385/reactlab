@@ -92,7 +92,7 @@ export default function Transporter() {
       },
 
       {
-        title: "Action",
+        title: "#",
         key: "_id",
         fixed: "right",
         width: "7%",

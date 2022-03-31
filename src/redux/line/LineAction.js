@@ -8,7 +8,7 @@ import {
   SET_EDIT_LINE,
   SET_LINE_SEARCH,
   SET_LINE_LIST,
-  SET_USER_LINE,ASSIGN_USER
+  SET_USER_LINE,ASSIGN_USER, REMOVE_USER
 } from "./LineConst";
 export const addLineAct = (line) => {
   return {
@@ -53,5 +53,9 @@ export const setSearchLineAct = (linelist) => ({
 
 export const assignUserAct = (data) => ({
   type: ASSIGN_USER,
+  payload:data
+});
+export const removeUserAct = (data) => ({
+  type: REMOVE_USER,
   payload:data
 });

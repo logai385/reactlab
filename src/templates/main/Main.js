@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
-import {
-  MenuOutlined,
-  AppstoreOutlined,  
-} from "@ant-design/icons";
+import { MenuOutlined, AppstoreOutlined } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { Link, Outlet,useNavigate  } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FooterContent from "./Footer/Footer";
 import Modal from "../../HOC/Modal";
@@ -14,11 +11,28 @@ import { LOCAL_STOGARE_TOKEN_NAME } from "../../ultil/systemSettings";
 const { Header, Sider, Content } = Layout;
 
 const Main = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.AuthReducer);
   const [state, setState] = useState({
     collapsed: false,
   });
+  const [current, setCurrent] = useState(
+    location.pathname === "/" || location.pathname === ""
+      ? "/dashboard"
+      : location.pathname
+  );
+  useEffect(() => {
+    if (location) {
+      if (current !== location.pathname) {
+        setCurrent(location.pathname);
+      }
+    }
+  }, [location, current]);
+
+  function handleClick(e) {
+    setCurrent(e.key);
+  }
   const toggle = () => {
     setState({ ...state, collapsed: !state.collapsed });
   };
@@ -30,7 +44,7 @@ const Main = () => {
           className="mainSider"
           trigger={null}
           collapsed={state.collapsed}
-          breakpoint="md"
+          breakpoint="lg"
           collapsedWidth={0}
           onBreakpoint={(broken) => {
             setState({ collapsed: broken });
@@ -44,20 +58,11 @@ const Main = () => {
             <img src="./img/logo.png" alt="logo" />
             <span className="brand-text">Quản lý Tuyến</span>
           </div>
-          {/* <div className="user-panel">
-            <div>
-              <div className="image">
-                <img
-                  src={`https://ui-avatars.com/api/?name=${user?.username}`}
-                  alt="avatar"
-                />
-              </div>
-              <div className="info">{user?.username}</div>
-            </div>
-          </div> */}
-          <Menu mode="vertical" className="userSection" key="menu1">
+
+        
+          <Menu className="userSection" key="menu1" mode="vertical"  selectedKeys={[current]} onClick={handleClick}>
             <SubMenu
-              key="sub2"
+              
               icon={
                 <div className="user-panel">
                   <div>
@@ -71,51 +76,56 @@ const Main = () => {
                   </div>
                 </div>
               }
-              mode="vertical"
             >
-              <Menu.Item key="sub2_1" onClick={()=>{
-                localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
-                navigate("/login");
-              }}>Thoát</Menu.Item>
-              <Menu.Item key="sub2_2">
-              <Link to="/user" >
-               DS nhân viên
-              </Link>
-              
+              <Menu.Item
+                
+                onClick={() => {
+                  localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
+                  navigate("/login");
+                }}
+              >
+                Thoát
+              </Menu.Item>
+              <Menu.Item key="/user">
+                <Link to="/user">DS nhân viên</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>
-          <Menu mode="inline" defaultSelectedKeys={null}  key="menu2">
-            <Menu.Item key="1">
-              <Link to="/dashboard" key="1">
+          <Menu mode="inline" defaultSelectedKeys={["/dashboard"]}  selectedKeys={[current]}  onClick={handleClick}>
+            <Menu.Item key="/dashboard">
+              <Link to="/dashboard">
                 <i className="nav-icon fas fa-tachometer-alt"></i> Dashboard
               </Link>
             </Menu.Item>
 
-            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Quản lý">
-              <Menu.Item key="sub1_4">
+            <SubMenu
+              
+              icon={<AppstoreOutlined />}
+              title="Quản lý"
+              mode="vertical"
+            >
+              <Menu.Item key="/unit">
                 <Link to="/unit">
-                  <i className="nav-icon fa fa-bus"></i> Đại lý
+                  <i className="nav-icon fa fa-store"></i> Đại lý
                 </Link>
               </Menu.Item>
-              <Menu.Item key="sub1_1">
+              <Menu.Item key="/line">
                 <Link to="/line">
                   <i className="nav-icon fa fa-route"></i> Tuyến
                 </Link>
               </Menu.Item>
-              <Menu.Item key="sub1_2">
+              <Menu.Item key="/transporter">
                 <Link to="/transporter">
                   <i className="nav-icon fa fa-bus-alt"></i> Xe
                 </Link>
               </Menu.Item>
-              <Menu.Item key="sub1_3">
+              <Menu.Item key="/document">
                 <Link to="/document">
                   <i className="nav-icon fa fa-file-alt"></i> Giấy phép
                 </Link>
               </Menu.Item>
             </SubMenu>
           </Menu>
-         
         </Sider>
         <Layout>
           <Header>
