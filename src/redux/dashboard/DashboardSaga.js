@@ -1,13 +1,23 @@
-import { takeLatest, put, call, select } from "redux-saga/effects";
+import { takeLatest, put, call } from "redux-saga/effects";
 import DashboardService from "../../services/DashboardService";
 import { STATUS_CODE } from "../../ultil/systemSettings";
-import { setLineByDateDataChart, setLineByMonthDataChart } from "./DashboardAction";
-import { GET_LINE_BY_DATE_DATA_CHART, GET_LINE_BY_MONTH_DATA_CHART } from "./DashboardConst";
-
+import {
+  setBusByDateDataChart,
+  setLineByDateDataChart,
+  setLineByMonthDataChart,
+} from "./DashboardAction";
+import {
+  GET_BUS_BY_DATE_DATA_CHART,
+  GET_LINE_BY_DATE_DATA_CHART,
+  GET_LINE_BY_MONTH_DATA_CHART,
+} from "./DashboardConst";
 
 function* getUnitLineByMonthDataApi(action) {
   try {
-    const { data, status } = yield call(DashboardService.getLineByMonthData,action.payload);
+    const { data, status } = yield call(
+      DashboardService.getLineByMonthData,
+      action.payload
+    );
 
     if (status === STATUS_CODE.SUCCESS) {
       yield put(setLineByMonthDataChart(data));
@@ -19,8 +29,10 @@ function* getUnitLineByMonthDataApi(action) {
 
 function* getUnitLineByDateDataApi(action) {
   try {
-    const { data, status } = yield call(DashboardService.getLineByDateData,action.payload);
-    
+    const { data, status } = yield call(
+      DashboardService.getLineByDateData,
+      action.payload
+    );
 
     if (status === STATUS_CODE.SUCCESS) {
       yield put(setLineByDateDataChart(data));
@@ -29,8 +41,23 @@ function* getUnitLineByDateDataApi(action) {
     console.log(error);
   }
 }
-function * DashboardSaga() {
+function* getUnitBusByDateDataApi(action) {
+  try {
+    const { data, status } = yield call(
+      DashboardService.getBusByDateData,
+      action.payload
+    );
+
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put(setBusByDateDataChart(data));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+function* DashboardSaga() {
   yield takeLatest(GET_LINE_BY_DATE_DATA_CHART, getUnitLineByDateDataApi);
+  yield takeLatest(GET_BUS_BY_DATE_DATA_CHART, getUnitBusByDateDataApi);
   yield takeLatest(GET_LINE_BY_MONTH_DATA_CHART, getUnitLineByMonthDataApi);
 }
 export default DashboardSaga;

@@ -1,4 +1,5 @@
 import React from "react";
+import StatisBusByDate from "./StatisBusByDate";
 import StatisLineByDate from "./StatisLineByDate";
 import StatisLineByMonth from "./StatisLineByMonth";
 
@@ -17,7 +18,9 @@ const Dashboard = () => {
             <div className="col-12 col-md-6 chart__item">
               <StatisLineByDate />
             </div>
-          
+            <div className="col-12 col-md-6 chart__item">
+              <StatisBusByDate />
+            </div>
           </div>
         </div>
       </div>

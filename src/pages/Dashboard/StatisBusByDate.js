@@ -4,40 +4,41 @@ import { Pie } from "react-chartjs-2";
 import { DatePicker, Select } from "antd";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { getLineListAct } from "../../redux/line/LineAction";
-import { getLineByDateDataChart } from "../../redux/dashboard/DashboardAction";
+
+import { getBusByDateDataChart} from "../../redux/dashboard/DashboardAction";
+import { getTransporterListAct } from "../../redux/transporter/TransporterAction";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const { Option } = Select;
 
-const StatisLineByDate = () => {
+const StatisBusByDate = () => {
   const dispatch = useDispatch();
   //   dispatch(getLineListAct());
 
-  const lineLst = useSelector((state) => state.LineReducer.lineList);
+  const busLst = useSelector((state) => state.TransporterReducer.transporterList);
 
-  const { lineByDateDataChart } = useSelector(
+  const { busByDateDataChart } = useSelector(
     (state) => state.DashboardReducer
   );
-  console.log("lineByDateDataChart", lineByDateDataChart);
+  
   const labels = ["Chuyến mất", "Tổng Chuyến"];
 
   const date = new Date();
   const [queryData, setQueryData] = useState({
-    line: lineLst[0]?._id,
+    bus: busLst[0]?._id,
     startDate: new Date(date.getFullYear(), date.getMonth(), 1).toString(),
     endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toString(),
   });
-  const renderLineOption = () =>
-    lineLst.map((item) => (
+  const renderBusOption = () =>
+    busLst.map((item) => (
       <Option key={item._id} value={item._id}>
-        {item.lineNumber}
+        {item.plate}
       </Option>
     ));
   useEffect(() => {
-    dispatch(getLineListAct());
+    dispatch(getTransporterListAct());
     dispatch(
-      getLineByDateDataChart({
-        line: queryData.line,
+      getBusByDateDataChart({
+        bus: queryData.bus,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
@@ -50,8 +51,8 @@ const StatisLineByDate = () => {
     labels,
     datasets: [
       {
-        label: lineByDateDataChart.lineNumber,
-        data: [lineByDateDataChart.miss, lineByDateDataChart.total],
+        label: busByDateDataChart.plate,
+        data: [busByDateDataChart.miss, busByDateDataChart.total],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 1,
@@ -62,24 +63,25 @@ const StatisLineByDate = () => {
     <>
       <Pie data={data} className="chart__content" />
       <div className="data__action">
-        <h5>Thống kế Tuyến theo khoảng</h5>
+        <h5>Thống kế Bus theo khoảng</h5>
 
         <div className="input-group ">
           <Select
-            name="line"
+            name="bus"
             onChange={(value) => {
-              setQueryData({ ...queryData, line: value });
+              setQueryData({ ...queryData, bus: value });
             }}
             className="mr-1"
-            value={queryData.line}
+            value={queryData.bus}
           >
-            {renderLineOption()}
+            {renderBusOption()}
           </Select>
           <DatePicker
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
-            defaultValue={moment(queryData.startDate)}
+            // defaultValue={moment(queryData.startDate)}
+            value={moment(queryData.startDate)}
             onChange={(date, dateString) => {
               setQueryData({ ...queryData, startDate: dateString });
             }}
@@ -97,4 +99,4 @@ const StatisLineByDate = () => {
     </>
   );
 };
-export default StatisLineByDate;
+export default StatisBusByDate;

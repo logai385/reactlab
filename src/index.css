@@ -236,6 +236,12 @@ html {
   display: flex;
   justify-content: flex-end;
 }
+.chart__item .chart__content{
+  margin-top: 70px;
+}
+.data__action .ant-picker-input>input{
+  width: 88px;
+}
 @media (max-width: 767.98px) {
   .ant-drawer-content-wrapper{
     width: 70%!important;
