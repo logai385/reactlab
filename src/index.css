@@ -204,7 +204,7 @@ html {
   display: -ms-flexbox;
   display: flex;
   background-color: #f4f6f9;
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
   transition: height 200ms linear;
   position: fixed;
@@ -223,7 +223,7 @@ html {
   margin: 0;
 }
 .chart__item{
-  position: relative;
+  position: relative;  
 }
 .chart__item .data__action{
   position: absolute;

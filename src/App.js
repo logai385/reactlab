@@ -12,7 +12,7 @@ import SignDocumentAdd from "./pages/SignDocument/SignDocumentAdd";
 import User from "./pages/User/User";
 import { useDispatch, } from "react-redux";
 import Unit from "./pages/Unit/Unit";
-
+// import LoadingPage from "./component/loading/LoadingPage";
 
 function App() {
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
+      {/* <LoadingPage /> */}
     </>
   );
 }

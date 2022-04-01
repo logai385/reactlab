@@ -94,7 +94,7 @@ const Main = () => {
           <Menu mode="inline" defaultSelectedKeys={["/dashboard"]}  selectedKeys={[current]}  onClick={handleClick}>
             <Menu.Item key="/dashboard">
               <Link to="/dashboard">
-                <i className="nav-icon fas fa-tachometer-alt"></i> Dashboard
+                <i className="nav-icon fas fa-tachometer-alt"></i> Thống kê
               </Link>
             </Menu.Item>
 
@@ -106,7 +106,7 @@ const Main = () => {
             >
               <Menu.Item key="/unit">
                 <Link to="/unit">
-                  <i className="nav-icon fa fa-store"></i> Đại lý
+                  <i className="nav-icon fa fa-store"></i> DN Vận tải
                 </Link>
               </Menu.Item>
               <Menu.Item key="/line">
