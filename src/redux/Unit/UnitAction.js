@@ -1,4 +1,4 @@
-import { GET_UNIT_LINE, SET_UNIT_LINE,ASSIGN_LINE,CREATE_UNIT, DELETE_UNIT,REMOVE_LINE } from "./UnitConst";
+import { GET_UNIT_LINE, SET_UNIT_LINE,ASSIGN_LINE,CREATE_UNIT, DELETE_UNIT,REMOVE_LINE, GET_UNIT, SET_UNIT } from "./UnitConst";
 
 export const getUnitLineAct=()=>({
     type:GET_UNIT_LINE,
@@ -23,3 +23,10 @@ export const deleteUnitAct=(unitId)=>({
     type:DELETE_UNIT,
     payload: unitId
 })
+export const getAllUnitAct=()=>({
+    type:GET_UNIT,
+});
+export const setUnitAct=(data)=>({
+    type:SET_UNIT,
+    payload: data
+});

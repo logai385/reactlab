@@ -5,40 +5,41 @@ import { DatePicker, Select } from "antd";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getBusByDateDataChart} from "../../redux/dashboard/DashboardAction";
-import { getTransporterListAct } from "../../redux/transporter/TransporterAction";
+import { getUnitByDateDataChart} from "../../redux/dashboard/DashboardAction";
+
+import { getAllUnitAct } from "../../redux/Unit/UnitAction";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const { Option } = Select;
 
-const StatisBusByDate = () => {
+const StatisUnitByDate = () => {
   const dispatch = useDispatch();
   //   dispatch(getLineListAct());
 
-  const busLst = useSelector((state) => state.TransporterReducer.transporterList);
+  const unitLst = useSelector((state) => state.UnitReducer.units);
 
-  const { busByDateDataChart } = useSelector(
+  const { unitByDateDataChart } = useSelector(
     (state) => state.DashboardReducer
   );
-  
+  console.log("unitByDateDataChart", unitByDateDataChart);
   const labels = ["Chuyến mất", "Tổng Chuyến"];
 
   const date = new Date();
   const [queryData, setQueryData] = useState({
-    bus: busLst[0]?._id,
+    unit: unitLst[0]?._id,
     startDate: new Date(date.getFullYear(), date.getMonth(), 1).toString(),
     endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toString(),
   });
   const renderBusOption = () =>
-    busLst.map((item) => (
+    unitLst.map((item) => (
       <Option key={item._id} value={item._id}>
-        {item.plate}
+        {item.name}
       </Option>
     ));
   useEffect(() => {
-    dispatch(getTransporterListAct());
+    dispatch(getAllUnitAct());
     dispatch(
-      getBusByDateDataChart({
-        bus: queryData.bus,
+      getUnitByDateDataChart({
+        unit: queryData.unit,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
@@ -51,8 +52,8 @@ const StatisBusByDate = () => {
     labels,
     datasets: [
       {
-        label: busByDateDataChart.plate,
-        data: [busByDateDataChart.miss, busByDateDataChart.total],
+        label: unitByDateDataChart?.name,
+        data: [unitByDateDataChart?.miss, unitByDateDataChart?.total],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 1,
@@ -63,16 +64,16 @@ const StatisBusByDate = () => {
     <>
       <Pie data={data} className="chart__content" />
       <div className="data__action">
-        <h5>Thống kế Bus theo khoảng</h5>
+        <h5>Thống kế Unit theo khoảng</h5>
 
         <div className="input-group ">
           <Select
             name="bus"
             onChange={(value) => {
-              setQueryData({ ...queryData, bus: value });
+              setQueryData({ ...queryData, unit: value });
             }}
             className="mr-1"
-            value={queryData.bus}
+            value={queryData.unit}
           >
             {renderBusOption()}
           </Select>
@@ -101,4 +102,4 @@ const StatisBusByDate = () => {
     </>
   );
 };
-export default StatisBusByDate;
+export default StatisUnitByDate;

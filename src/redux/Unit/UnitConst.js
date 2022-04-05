@@ -4,3 +4,5 @@ export const ASSIGN_LINE = "ASSIGN_LINE";
 export const CREATE_UNIT = "CREATE_UNIT";
 export const DELETE_UNIT = "DELETE_UNIT";
 export const REMOVE_LINE = "REMOVE_LINE";
+export const SET_UNIT = "SET_UNIT";
+export const GET_UNIT = "GET_UNIT";

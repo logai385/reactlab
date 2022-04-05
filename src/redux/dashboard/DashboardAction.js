@@ -5,6 +5,8 @@ import {
   GET_LINE_BY_MONTH_DATA_CHART,
   SET_BUS_BY_DATE_DATA_CHART,
   GET_BUS_BY_DATE_DATA_CHART,
+  SET_UNIT_BY_DATE_DATA_CHART,
+  GET_UNIT_BY_DATE_DATA_CHART,
 } from "./DashboardConst";
 
 export const setLineByDateDataChart = (data) => ({
@@ -29,5 +31,13 @@ export const setBusByDateDataChart = (data) => ({
 });
 export const getBusByDateDataChart = (queryDate) => ({
   type: GET_BUS_BY_DATE_DATA_CHART,
+  payload: queryDate,
+});
+export const setUnitByDateDataChart = (data) => ({
+  type: SET_UNIT_BY_DATE_DATA_CHART,
+  payload: data,
+});
+export const getUnitByDateDataChart = (queryDate) => ({
+  type: GET_UNIT_BY_DATE_DATA_CHART,
   payload: queryDate,
 });

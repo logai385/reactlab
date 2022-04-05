@@ -76,6 +76,7 @@ const StatisLineByDate = () => {
             {renderLineOption()}
           </Select>
           <DatePicker
+          suffixIcon={null}
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -85,6 +86,7 @@ const StatisLineByDate = () => {
             }}
           />
           <DatePicker
+          suffixIcon={null}
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}
