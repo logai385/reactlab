@@ -11,19 +11,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchLineAct } from "../../redux/line/LineAction";
 import {
-  assignLineAct,
-  getUnitLineAct,
+  assignBusAct,
+  getUnitBusAct,
   createUnitAct,
   deleteUnitAct,
-  removeLineAct,
+  removeBusAct,
 } from "../../redux/Unit/UnitAction";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
-import { DeleteTwoTone,CloseCircleTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 const Unit = () => {
   const dispatch = useDispatch();
   const useSearch = useRef(null);
 
-  const { unitLines } = useSelector((state) => state.UnitReducer);
+  const { unitBuses } = useSelector((state) => state.UnitReducer);
   const { lineSearch } = useSelector((state) => state.LineReducer);
   const options = lineSearch.map((item) => ({
     value: item._id.toString(),
@@ -36,9 +36,9 @@ const Unit = () => {
   const onSelect = (value, option, unitId) => {
     setSearchText(option.label);
     dispatch(
-      assignLineAct({
+      assignBusAct({
         unitId: unitId,
-        lineId: value,
+        BusId: value,
       })
     );
   };
@@ -54,23 +54,26 @@ const Unit = () => {
     setSearchText(value);
   };
   useEffect(() => {
-    dispatch(getUnitLineAct());
+    dispatch(getUnitBusAct());
     dispatch(getSearchLineAct(""));
 
     return () => {};
   }, []);
-  const renderUnitLine = () => {
-    return unitLines.map((unitLine, index) => {
+  const renderUnitBus = () => {
+    return unitBuses.map((unitBus, index) => {
       return (
-        <div className="col-12 col-sm-6 col-md-4 user__item mb-3" key={index}>
-          <div className="card">
+        <div
+          className="col-12 col-sm-6 col-md-4 user__item mb-3 pr-0"
+          key={index}
+        >
+          <div className="card" style={{ height: "100%" }}>
             <div className="card-header d-flex justify-content-between align-items-center">
-              <h6 className="card-title mb-0">{unitLine.unit.name}</h6>
+              <h6 className="card-title mb-0">{unitBus.unit.name}</h6>
               <Popconfirm
                 placement="topRight"
                 title="Bạn có chắc chắn muốn xóa?"
                 onConfirm={() => {
-                  dispatch(deleteUnitAct(unitLine.unit._id));
+                  dispatch(deleteUnitAct(unitBus.unit._id));
                 }}
                 okText="Yes"
                 cancelText="No"
@@ -81,38 +84,38 @@ const Unit = () => {
               </Popconfirm>
             </div>
             <div className="card-body">
-            <Popover
+              <Popover
                 placement="bottom"
                 content={() => (
                   <>
                     <table className="table table-hover table-sm">
                       <thead>
                         <tr>
-                          <th>Số</th>
-                          <th>Tuyến</th>
+                          <th>Biển số</th>
+                          {/* <th>Tuyến</th> */}
                           <th className="text-center">#</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {unitLine?.lines.map((line, index) => {
+                        {unitBus?.buses.map((bus, index) => {
                           return (
                             <tr key={index}>
                               <td className="align-middle">
                                 <Tag color="geekblue" key={index}>
-                                  {line.lineNumber}
+                                  {bus.plate}
                                 </Tag>
                               </td>
-                              <td className="align-middle">
-                                {line.description}
-                              </td>
+                              {/* <td className="align-middle">
+                                {bus.description}
+                              </td> */}
                               <td className="align-middle">
                                 <Button
                                   type="link"
                                   onClick={() => {
                                     dispatch(
-                                      removeLineAct({
-                                        userId: unitLine.user._id,
-                                        lineId: line._id,
+                                      removeBusAct({
+                                        userId: unitBus.user._id,
+                                        busId: bus._id,
                                       })
                                     );
                                   }}
@@ -132,15 +135,33 @@ const Unit = () => {
                 )}
                 trigger="click"
               >
-                {unitLine?.lines.map((line, index) => {
-                  return (
-                    <Tag color="geekblue" key={index}>
-                      {line.lineNumber}
-                    </Tag>
-                  );
-                })}
+                <div>
+                  {unitBus?.buses.length > 28
+                    ? unitBus?.buses.slice(0, 28).map((bus, index) => {
+                        return (
+                          <Tag
+                            color="geekblue"
+                            key={index}
+                            style={{ minWidth: "68.17px" }}
+                          >
+                            {bus.plate}
+                          </Tag>
+                        );
+                      })
+                    : unitBus?.buses.map((bus, index) => {
+                        return (
+                          <Tag
+                            color="geekblue"
+                            key={index}
+                            style={{ minWidth: "68.17px" }}
+                          >
+                            {bus.plate}
+                          </Tag>
+                        );
+                      })}
+                </div>
               </Popover>
-             
+
               <Popover
                 placement="bottom"
                 content={() => (
@@ -149,12 +170,12 @@ const Unit = () => {
                       style={{ width: 200 }}
                       options={options}
                       onSelect={(value, option) => {
-                        onSelect(value, option, unitLine.unit._id);
+                        onSelect(value, option, unitBus.unit._id);
                       }}
                       onSearch={onSearch}
                       onChange={onChange}
                       value={searchText}
-                      placeholder="line"
+                      placeholder="biến số"
                     />
                   </>
                 )}
@@ -179,7 +200,7 @@ const Unit = () => {
       {/* Main content */}
 
       <section className="content">
-        <div className="row">{renderUnitLine()}</div>
+        <div className="row">{renderUnitBus()}</div>
         <Popover
           placement="bottom"
           content={() => (

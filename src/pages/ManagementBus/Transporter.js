@@ -65,7 +65,7 @@ export default function Transporter() {
         ),
       },
       {
-        title: "Tuyến chính",
+        title: "T. Chính",
         dataIndex: "mainLines",
         key: "mainLines",
         render: (lines) =>
@@ -78,7 +78,7 @@ export default function Transporter() {
           }),
       },
       {
-        title: "Tuyến tăng cường",
+        title: "T. Tăng cường",
         dataIndex: "minorLines",
         key: "minorLines",
         render: (lines) =>
@@ -90,7 +90,11 @@ export default function Transporter() {
             );
           }),
       },
-
+      {
+        title: "Doanh nghiệp",
+        dataIndex: "unit",
+        key: "unit"
+      },
       {
         title: "#",
         key: "_id",
@@ -128,13 +132,14 @@ export default function Transporter() {
     ];
 
     const dataSource = transporterList.map((transporter, index) => {
-      let { _id, plate, mainLines, minorLines } = transporter;
+      let { _id, plate, mainLines, minorLines,unit } = transporter;
 
       return {
         index: index + 1,
         plate: plate,
         mainLines: mainLines,
         minorLines: minorLines,
+        unit: unit?.name,
         id: _id,
       };
     });

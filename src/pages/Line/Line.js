@@ -48,12 +48,13 @@ export default function RegisterLine() {
         title: "#",
         dataIndex: "index",
         key: "index",
-        width: "7%",
+        width: "5%",
       },
       {
         title: "Số Tuyến",
         dataIndex: "lineNumber",
         key: "lineNumber",
+        width: "7%",
         render: (number) => (
           <Tag color="geekblue" key={number}>
             {number}
@@ -63,24 +64,21 @@ export default function RegisterLine() {
       {
         title: "Tên Tuyến",
         dataIndex: "description",
-        key: "description",
+        key: "description",        
       },
+ 
       {
-        title: "Nhân viên",
-        dataIndex: "user",
-        key: "user",
-        render: (user) => <b>{user?.name}</b>,
-      },
-      {
-        title: "Đại lý",
+        title: "Doanh nghiệp",
         dataIndex: "unit",
         key: "unit",
+        
         render: (unit) => <b>{unit?.name}</b>,
       },            
       {
-        title: "Trạng thái",
+        title: "T.Thái",
         dataIndex: "status",
         key: "status",
+        width: "7%",
         render: (status) =>
           status ? (
             <Tag color="green">Enable</Tag>
@@ -132,7 +130,7 @@ export default function RegisterLine() {
         unit:line.unit,
         description: line.description,
         status: line.status,
-        user: line.user,
+ 
         id: line._id,
       };
     });

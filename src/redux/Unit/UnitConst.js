@@ -1,8 +1,8 @@
-export const SET_UNIT_LINE = "SET_UNIT_LINE";
-export const GET_UNIT_LINE = "GET_UNIT_LINE";
-export const ASSIGN_LINE = "ASSIGN_LINE";
+export const SET_UNIT_BUS = "SET_UNIT_BUS";
+export const GET_UNIT_BUS = "GET_UNIT_BUS";
+export const ASSIGN_BUS = "ASSIGN_BUS";
 export const CREATE_UNIT = "CREATE_UNIT";
 export const DELETE_UNIT = "DELETE_UNIT";
-export const REMOVE_LINE = "REMOVE_LINE";
-export const SET_UNIT = "SET_UNIT";
+export const REMOVE_BUS = "REMOVE_BUS";
 export const GET_UNIT = "GET_UNIT";
+export const SET_UNIT = "SET_UNIT";
