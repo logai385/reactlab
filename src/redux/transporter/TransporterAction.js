@@ -6,7 +6,7 @@ import {
   SET_EDITING_TRANSPORTER,
   SET_TRANSPORTER_BY_LINE,
   SET_TRANSPORTER_LIST,
-  UPDATE_TRANSPORTER_API,
+  UPDATE_TRANSPORTER_API,GET_TRANSPORTER_BY_KEYWORD_API
 } from "./TransporterConst";
 
 export const setTransporterListAct = (transporterList) => ({
@@ -41,4 +41,8 @@ export const setTransporterByLineAct = (transporter) => ({
 export const getTransporterByLineAct = (id) => ({
   type:GET_TRANSPORTER_BY_LINE_API,
   payload:id
+})
+export const getTransporterByKeywordAct = (keyword) => ({
+  type:GET_TRANSPORTER_BY_KEYWORD_API,
+  payload:keyword
 })

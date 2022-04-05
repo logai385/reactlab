@@ -2,21 +2,12 @@ import { message } from "antd";
 import { takeLatest, put, call} from "redux-saga/effects";
 import UnitService from "../../services/UnitService";
 import { STATUS_CODE } from "../../ultil/systemSettings";
-<<<<<<< HEAD
-import { getUnitLineAct, setUnitAct, setUnitLineAct } from "./UnitAction";
-=======
-import { getUnitBusAct,  setUnitBusAct } from "./UnitAction";
->>>>>>> 7750dc13bff97dfea17be3255b75fa74024affcc
+import { getUnitBusAct,  setUnitAct,  setUnitBusAct } from "./UnitAction";
 import {
   ASSIGN_BUS,
   CREATE_UNIT,
-<<<<<<< HEAD
-  GET_UNIT_LINE,
-  DELETE_UNIT,REMOVE_LINE, GET_UNIT
-=======
   GET_UNIT_BUS,
-  DELETE_UNIT,REMOVE_BUS
->>>>>>> 7750dc13bff97dfea17be3255b75fa74024affcc
+  DELETE_UNIT,REMOVE_BUS, GET_UNIT
 } from "./UnitConst";
 
 function* getUnitBusApi() {
@@ -30,8 +21,7 @@ function* getUnitBusApi() {
     console.log(error);
   }
 }
-<<<<<<< HEAD
-function* getAllUnitApi() {
+function* getUnitApi() {
   try {
     const { data, status } = yield call(UnitService.getAllUnit);
 
@@ -42,10 +32,7 @@ function* getAllUnitApi() {
     console.log(error);
   }
 }
-function* assignLineApi(action) {
-=======
 function* assignBusApi(action) {
->>>>>>> 7750dc13bff97dfea17be3255b75fa74024affcc
   try {
     const { status } = yield call(UnitService.assignBus, action.payload);
 
@@ -99,16 +86,10 @@ function* deleteUnitApi(action) {
   }
 }
 function* UnitSaga() {
-<<<<<<< HEAD
-  yield takeLatest(GET_UNIT_LINE, getUnitLineApi);
-  yield takeLatest(GET_UNIT, getAllUnitApi);
-  yield takeLatest(ASSIGN_LINE, assignLineApi);
-  yield takeLatest(REMOVE_LINE, removeLineApi);
-=======
   yield takeLatest(GET_UNIT_BUS, getUnitBusApi);
+  yield takeLatest(GET_UNIT, getUnitApi);
   yield takeLatest(ASSIGN_BUS, assignBusApi);
   yield takeLatest(REMOVE_BUS, removeBusApi);
->>>>>>> 7750dc13bff97dfea17be3255b75fa74024affcc
   yield takeLatest(CREATE_UNIT, createUnitApi);
   yield takeLatest(DELETE_UNIT, deleteUnitApi);
 }

@@ -13,6 +13,7 @@ import { STATUS_CODE } from "../../ultil/systemSettings";
 import {
   ADD_TRANSPORTER_API,
   DELETE_TRANSPORTER_API,
+  GET_TRANSPORTER_BY_KEYWORD_API,
   GET_TRANSPORTER_BY_LINE_API,
   GET_TRANSPORTER_LIST_API,
   UPDATE_TRANSPORTER_API,
@@ -33,6 +34,16 @@ function* getTransporterByLineApi(action) {
 function* getTransporterListApi() {
   try {
     let { data, status } = yield call(TransporterService.getTransporterList);    
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put(setTransporterListAct(data));
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+function* getTransporterByKeywordApi(action) {
+  try {
+    let { data, status } = yield call(TransporterService.getBusListByKeyword, action.payload);    
     if (status === STATUS_CODE.SUCCESS) {
       yield put(setTransporterListAct(data));
     }
@@ -94,6 +105,7 @@ function* uppdateTransporterApi(action) {
 
 function* TransporterSaga() {
   yield takeLatest(GET_TRANSPORTER_LIST_API, getTransporterListApi);
+  yield takeLatest(GET_TRANSPORTER_BY_KEYWORD_API, getTransporterByKeywordApi);
   yield takeLatest(GET_TRANSPORTER_BY_LINE_API, getTransporterByLineApi);
   yield takeLatest(DELETE_TRANSPORTER_API, deleteTransporterApi);
   yield takeLatest(ADD_TRANSPORTER_API, addTransporteApi);

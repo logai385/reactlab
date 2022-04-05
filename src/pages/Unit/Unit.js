@@ -9,7 +9,6 @@ import {
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchLineAct } from "../../redux/line/LineAction";
 import {
   assignBusAct,
   getUnitBusAct,
@@ -19,15 +18,16 @@ import {
 } from "../../redux/Unit/UnitAction";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 import { DeleteTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
+import { getTransporterByKeywordAct } from "../../redux/transporter/TransporterAction";
 const Unit = () => {
   const dispatch = useDispatch();
   const useSearch = useRef(null);
 
   const { unitBuses } = useSelector((state) => state.UnitReducer);
-  const { lineSearch } = useSelector((state) => state.LineReducer);
-  const options = lineSearch.map((item) => ({
+  const { transporterList } = useSelector((state) => state.TransporterReducer);
+  const options = transporterList.map((item) => ({
     value: item._id.toString(),
-    label: item.lineNumber,
+    label: item.plate,
   }));
   const [searchText, setSearchText] = useState("");
   const [formData, setFormData] = useState({
@@ -38,7 +38,7 @@ const Unit = () => {
     dispatch(
       assignBusAct({
         unitId: unitId,
-        BusId: value,
+        busId: value,
       })
     );
   };
@@ -47,7 +47,7 @@ const Unit = () => {
       clearTimeout(useSearch.current);
     }
     useSearch.current = setTimeout(() => {
-      dispatch(getSearchLineAct(data));
+      dispatch(getTransporterByKeywordAct(data));
     }, 300);
   };
   const onChange = (value) => {
@@ -55,7 +55,7 @@ const Unit = () => {
   };
   useEffect(() => {
     dispatch(getUnitBusAct());
-    dispatch(getSearchLineAct(""));
+    dispatch(getTransporterByKeywordAct(""));
 
     return () => {};
   }, []);
@@ -114,7 +114,7 @@ const Unit = () => {
                                   onClick={() => {
                                     dispatch(
                                       removeBusAct({
-                                        userId: unitBus.user._id,
+                                        unitId: unitBus.unit._id,
                                         busId: bus._id,
                                       })
                                     );

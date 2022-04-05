@@ -7,7 +7,7 @@ import {
   getDocumentsAct,
   // setEditingDocumentAct,
 } from "../../redux/document/DocumentAction";
-import { Popconfirm, Space, Table, Tag } from "antd";
+import { Image, Popconfirm, Space, Table, Tag } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 
@@ -99,21 +99,13 @@ export default function SignDocument() {
         title: "File",
         dataIndex: "files",
         key: "files",
-        render: (text, record, index) =>
-        <Space size="middle">
-           {record.files.map((file, index) => {
-            return (
-              <a
-                href={`${URL_STATIC}/${file}`}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                link
-              </a>
-            );
-          })}
-        </Space>
-         
+        render: (text, record, index) => (
+          <Space size="middle">
+            {record.files.map((file, index) => {
+              return <Image width={20} src={`${URL_STATIC}/${file}`} />;
+            })}
+          </Space>
+        ),
       },
       {
         title: "#",
@@ -135,7 +127,6 @@ export default function SignDocument() {
                   <DeleteTwoTone twoToneColor="#eb2f96" />
                 </span>
               </Popconfirm>
-
             </Space>
           );
         },
@@ -190,7 +181,7 @@ export default function SignDocument() {
                   <button className="btn btn-outline-primary" type="button">
                     search
                   </button>
-            
+
                   <Link to="/document/add" className="btn btn-primary">
                     <i className="fa fa-plus"></i>
                   </Link>
@@ -201,7 +192,6 @@ export default function SignDocument() {
           <div className="row">
             <div className="col-12">
               <div className="card">
-       
                 <div className="card-body">{renderDocumentList()}</div>
                 {/* /.card-body */}
               </div>
