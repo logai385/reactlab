@@ -18,7 +18,7 @@ const User = () => {
   const { lineSearch } = useSelector((state) => state.LineReducer);
   const options=lineSearch.map((item) => ({
     value: item._id.toString(),
-    label: item.lineNumber,
+    label: item.lineNumber + " - " + item.description,
   }));
   const [searchText, setSearchText] = useState("");
   const onSelect = (value, option, userId) => {

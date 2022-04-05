@@ -1,14 +1,14 @@
-import { SET_UNIT_LINE } from "./UnitConst";
+import { SET_UNIT_BUS } from "./UnitConst";
 
 const initialState = {
-  unitLines: [],
+  unitBuses: [],
 };
 
 const UnitReducer= (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case SET_UNIT_LINE:
-      return { ...state, unitLines:payload };
+    case SET_UNIT_BUS:
+      return { ...state, unitBuses:payload };
 
     default:
       return state;

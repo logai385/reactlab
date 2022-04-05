@@ -1,18 +1,18 @@
-import { GET_UNIT_LINE, SET_UNIT_LINE,ASSIGN_LINE,CREATE_UNIT, DELETE_UNIT,REMOVE_LINE } from "./UnitConst";
+import { GET_UNIT_BUS, SET_UNIT_BUS,ASSIGN_BUS,CREATE_UNIT, DELETE_UNIT,REMOVE_BUS } from "./UnitConst";
 
-export const getUnitLineAct=()=>({
-    type:GET_UNIT_LINE,
+export const getUnitBusAct=()=>({
+    type:GET_UNIT_BUS,
 });
-export const setUnitLineAct=(unitLines)=>({
-    type:SET_UNIT_LINE,
-    payload: unitLines
+export const setUnitBusAct=(unitBus)=>({
+    type:SET_UNIT_BUS,
+    payload: unitBus
 });
-export const assignLineAct=(data)=>({
-    type:ASSIGN_LINE,
+export const assignBusAct=(data)=>({
+    type:ASSIGN_BUS,
     payload: data
 });
-export const removeLineAct=(data)=>({
-    type:REMOVE_LINE,
+export const removeBusAct=(data)=>({
+    type:REMOVE_BUS,
     payload: data
 });
 export const createUnitAct=(data)=>({

@@ -1,47 +1,47 @@
 import { message } from "antd";
-import { takeLatest, put, call, select } from "redux-saga/effects";
+import { takeLatest, put, call} from "redux-saga/effects";
 import UnitService from "../../services/UnitService";
 import { STATUS_CODE } from "../../ultil/systemSettings";
-import { getUnitLineAct, setUnitLineAct } from "./UnitAction";
+import { getUnitBusAct,  setUnitBusAct } from "./UnitAction";
 import {
-  ASSIGN_LINE,
+  ASSIGN_BUS,
   CREATE_UNIT,
-  GET_UNIT_LINE,
-  DELETE_UNIT,REMOVE_LINE
+  GET_UNIT_BUS,
+  DELETE_UNIT,REMOVE_BUS
 } from "./UnitConst";
 
-function* getUnitLineApi() {
+function* getUnitBusApi() {
   try {
-    const { data, status } = yield call(UnitService.getAllUnitLine);
+    const { data, status } = yield call(UnitService.getAllUnitBus);
 
     if (status === STATUS_CODE.SUCCESS) {
-      yield put(setUnitLineAct(data));
+      yield put(setUnitBusAct(data));
     }
   } catch (error) {
     console.log(error);
   }
 }
-function* assignLineApi(action) {
+function* assignBusApi(action) {
   try {
-    const { status } = yield call(UnitService.assignLine, action.payload);
+    const { status } = yield call(UnitService.assignBus, action.payload);
 
     if (status === STATUS_CODE.SUCCESS) {
       message.success("Cập nhật thành công");
 
-      yield put(getUnitLineAct());
+      yield put(getUnitBusAct());
     }
   } catch (error) {
     console.log(error);
   }
 }
-function* removeLineApi(action) {
+function* removeBusApi(action) {
   try {
-    const { status } = yield call(UnitService.removeLine, action.payload);
+    const { status } = yield call(UnitService.removeBus, action.payload);
 
     if (status === STATUS_CODE.SUCCESS) {
       message.success("Cập nhật thành công");
 
-      yield put(getUnitLineAct());
+      yield put(getUnitBusAct());
     }
   } catch (error) {
     console.log(error);
@@ -54,7 +54,7 @@ function* createUnitApi(action) {
     if (status === STATUS_CODE.CREATED) {
       message.success("Thêm Đại lý thành công");
 
-      yield put(getUnitLineAct());
+      yield put(getUnitBusAct());
     }
   } catch (error) {
     console.log(error);
@@ -68,16 +68,16 @@ function* deleteUnitApi(action) {
     if (status === STATUS_CODE.SUCCESS) {
       message.success("Xóa Đại lý thành công");
 
-      yield put(getUnitLineAct());
+      yield put(getUnitBusAct());
     }
   } catch (error) {
     console.log(error);
   }
 }
 function* UnitSaga() {
-  yield takeLatest(GET_UNIT_LINE, getUnitLineApi);
-  yield takeLatest(ASSIGN_LINE, assignLineApi);
-  yield takeLatest(REMOVE_LINE, removeLineApi);
+  yield takeLatest(GET_UNIT_BUS, getUnitBusApi);
+  yield takeLatest(ASSIGN_BUS, assignBusApi);
+  yield takeLatest(REMOVE_BUS, removeBusApi);
   yield takeLatest(CREATE_UNIT, createUnitApi);
   yield takeLatest(DELETE_UNIT, deleteUnitApi);
 }
