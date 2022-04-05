@@ -39,7 +39,7 @@ const StatisUnitByDate = () => {
     dispatch(getAllUnitAct());
     dispatch(
       getUnitByDateDataChart({
-        unit: queryData.unit,
+        unit: queryData.unit?queryData.unit:unitLst[0]?._id,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
@@ -73,7 +73,7 @@ const StatisUnitByDate = () => {
               setQueryData({ ...queryData, unit: value });
             }}
             className="mr-1"
-            value={queryData.unit}
+            value={queryData.unit?queryData.unit:unitLst[0]?._id}
           >
             {renderBusOption()}
           </Select>

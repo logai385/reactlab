@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, DatePicker, Input, Select, Space, Typography } from "antd";
+import moment from "moment";
 
 import { useSelector, useDispatch, connect } from "react-redux";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
@@ -48,9 +49,12 @@ const SignDocumentAdd = (props) => {
   };
   const handleTransporterChange = (value) => {
     setFieldValue("transporter", value);
+
   };
   const handleLineChange = (value) => {
     setFieldValue("line", value);
+    setFieldValue("transporter", "");
+
     dispatch(getTransporterByLineAct(value));
   };
   const handleChangeFile = (e) => {
@@ -94,6 +98,7 @@ const SignDocumentAdd = (props) => {
                     size="large"
                     style={{ width: "100%" }}
                     onChange={handleDateChange}
+                    defaultValue={moment(new Date())}
                   />
                   {errors.dateSign && touched.dateSign && (
                     <Text type="danger">Yêu cầu nhập</Text>
@@ -210,7 +215,7 @@ const SignDocumentFormik = withFormik({
     const { userLine } = props;
     return {
       id: "",
-      dateSign: null,
+      dateSign: new Date(),
       line: userLine[0]?._id,
       transporter: null,
       quantity: 15,

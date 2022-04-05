@@ -36,6 +36,7 @@ function* getTransporterListApi() {
     let { data, status } = yield call(TransporterService.getTransporterList);    
     if (status === STATUS_CODE.SUCCESS) {
       yield put(setTransporterListAct(data));
+      
     }
   } catch (error) {
     console.log(error.message);

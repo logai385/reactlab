@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { DatePicker, Select } from "antd";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getBusByDateDataChart} from "../../redux/dashboard/DashboardAction";
+import { getBusByDateDataChart } from "../../redux/dashboard/DashboardAction";
 import { getTransporterListAct } from "../../redux/transporter/TransporterAction";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const { Option } = Select;
@@ -14,17 +14,17 @@ const StatisBusByDate = () => {
   const dispatch = useDispatch();
   //   dispatch(getLineListAct());
 
-  const busLst = useSelector((state) => state.TransporterReducer.transporterList);
-
-  const { busByDateDataChart } = useSelector(
-    (state) => state.DashboardReducer
+  const busLst = useSelector(
+    (state) => state.TransporterReducer.transporterList
   );
-  
+
+  const { busByDateDataChart } = useSelector((state) => state.DashboardReducer);
+
   const labels = ["Chuyến mất", "Tổng Chuyến"];
 
   const date = new Date();
   const [queryData, setQueryData] = useState({
-    bus: busLst[0]?._id,
+    bus:busLst[0]?._id,
     startDate: new Date(date.getFullYear(), date.getMonth(), 1).toString(),
     endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toString(),
   });
@@ -38,13 +38,13 @@ const StatisBusByDate = () => {
     dispatch(getTransporterListAct());
     dispatch(
       getBusByDateDataChart({
-        bus: queryData.bus,
+        bus: queryData.bus?queryData.bus:busLst[0]?._id,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
     );
-
-    return () => {};
+    
+    return () => { };
   }, [queryData]);
 
   const data = {
@@ -72,12 +72,12 @@ const StatisBusByDate = () => {
               setQueryData({ ...queryData, bus: value });
             }}
             className="mr-1"
-            value={queryData.bus}
+            value={queryData.bus?queryData.bus:busLst[0]?._id}
           >
             {renderBusOption()}
           </Select>
           <DatePicker
-          suffixIcon={null}
+            suffixIcon={null}
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -88,7 +88,7 @@ const StatisBusByDate = () => {
             }}
           />
           <DatePicker
-          suffixIcon={null}
+            suffixIcon={null}
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}

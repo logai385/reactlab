@@ -37,7 +37,7 @@ const StatisLineByDate = () => {
     dispatch(getLineListAct());
     dispatch(
       getLineByDateDataChart({
-        line: queryData.line,
+        line: queryData.line?queryData.line: lineLst[0]?._id,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
@@ -71,7 +71,7 @@ const StatisLineByDate = () => {
               setQueryData({ ...queryData, line: value });
             }}
             className="mr-1"
-            value={queryData.line}
+            value={queryData.line?queryData.line:lineLst[0]?._id}
           >
             {renderLineOption()}
           </Select>

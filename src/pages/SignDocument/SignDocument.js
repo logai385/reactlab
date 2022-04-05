@@ -100,11 +100,11 @@ export default function SignDocument() {
         dataIndex: "files",
         key: "files",
         render: (text, record, index) => (
-          <Space size="middle">
+          <Image.PreviewGroup >
             {record.files.map((file, index) => {
               return <Image width={20} src={`${URL_STATIC}/${file}`} />;
             })}
-          </Space>
+          </Image.PreviewGroup>
         ),
       },
       {
