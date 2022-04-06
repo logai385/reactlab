@@ -62,7 +62,7 @@ const Main = () => {
         
           <Menu className="userSection" key="menu1" mode="vertical"  selectedKeys={[current]} onClick={handleClick}>
             <SubMenu
-              
+              key="sub1"
               icon={
                 <div className="user-panel">
                   <div>
@@ -78,7 +78,7 @@ const Main = () => {
               }
             >
               <Menu.Item
-                
+                key="/login"
                 onClick={() => {
                   localStorage.removeItem(LOCAL_STOGARE_TOKEN_NAME);
                   navigate("/login");
@@ -97,8 +97,13 @@ const Main = () => {
                 <i className="nav-icon fas fa-tachometer-alt"></i> Thống kê
               </Link>
             </Menu.Item>
-
+            <Menu.Item key="/insp/document">
+              <Link to="/insp/document">
+                <i className="nav-icon fa fa-check-double"></i> Kiểm kê
+              </Link>
+            </Menu.Item>
             <SubMenu
+              key="sub2"
               
               icon={<AppstoreOutlined />}
               title="Quản lý"

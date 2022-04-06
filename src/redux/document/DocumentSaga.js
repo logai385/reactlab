@@ -4,6 +4,7 @@ import {STATUS_CODE} from "../../ultil/systemSettings";
 import {
   ADD_DOCUMENT_API,  
   DELETE_DOCUMENT_API,
+  GET_DOCUMENT_BY_LINE_API,
   GET_DOCUMENT_LIST_API,
 } from "./DocumentConst";
 
@@ -16,6 +17,21 @@ function* getDocumentListApi() {
 
     if (status===STATUS_CODE.SUCCESS) {
       yield put(setDocumentList(data));
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+function* getDocumentByLineApi(action) {
+  try {
+    let { data,status } = yield call(DocumentServices.getDocumentByLine,action.payload);
+
+    if (status===STATUS_CODE.SUCCESS) {
+      yield put(setDocumentList(data));
+    }
+    else{
+      yield put(setDocumentList([]));
+
     }
   } catch (error) {
     console.log(error.message);
@@ -53,6 +69,7 @@ function* deleteDocumentApi(action) {
 
 function* DocumentSaga() {
   yield takeLatest(GET_DOCUMENT_LIST_API, getDocumentListApi);
+  yield takeLatest(GET_DOCUMENT_BY_LINE_API, getDocumentByLineApi);
   yield takeLatest(ADD_DOCUMENT_API, addDocumentApi);
   yield takeLatest(DELETE_DOCUMENT_API, deleteDocumentApi);
 }

@@ -26,8 +26,8 @@ const StatisUnitByDate = () => {
   const date = new Date();
   const [queryData, setQueryData] = useState({
     unit: unitLst[0]?._id,
-    startDate: new Date(date.getFullYear(), date.getMonth(), 1).toString(),
-    endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toString(),
+    startDate: new Date(date.getFullYear(), date.getMonth(), 1).toISOString(),
+    endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString(),
   });
   const renderBusOption = () =>
     unitLst.map((item) => (
