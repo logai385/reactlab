@@ -225,7 +225,8 @@ const SignDocumentFormik = withFormik({
   },
   validate: (values, props) => {
     const errors={};
-    if(values.missQuantity>values.quantity) errors.missQuantity="Số mất chuyến không được lớn hơn số chuyến";
+    if(values.missQuantity>values.quantity) errors.missQuantity="Số mất chuyến không được lớn hơn số chuyến"
+    else errors.missQuantity=null;
     return errors;
   },
   validationSchema: Yup.object().shape({
