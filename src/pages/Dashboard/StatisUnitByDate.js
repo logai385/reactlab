@@ -21,7 +21,7 @@ const StatisUnitByDate = () => {
     (state) => state.DashboardReducer
   );
   console.log("unitByDateDataChart", unitByDateDataChart);
-  const labels = ["Chuyến mất", "Tổng Chuyến"];
+  const labels = ["Mất chuyến", "Tổng chuyến"];
 
   const date = new Date();
   const [queryData, setQueryData] = useState({
@@ -61,14 +61,15 @@ const StatisUnitByDate = () => {
     ],
   };
   return (
-    <>
-      <Pie data={data} className="chart__content" />
+    <div className="chart__content">
+      <Pie data={data} className="piechart__content" />
       <div className="data__action">
-        <h5>Thống kế Unit theo khoảng</h5>
+        <h5 className="text-center">Thống kê theo Doanh nghiệp</h5>
 
         <div className="input-group ">
           <Select
             name="bus"
+            style={{ maxWidth: "35%" }}
             onChange={(value) => {
               setQueryData({ ...queryData, unit: value });
             }}
@@ -78,7 +79,7 @@ const StatisUnitByDate = () => {
             {renderBusOption()}
           </Select>
           <DatePicker
-          suffixIcon={null}
+          
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -89,7 +90,7 @@ const StatisUnitByDate = () => {
             }}
           />
           <DatePicker
-          suffixIcon={null}
+          
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}
@@ -99,7 +100,7 @@ const StatisUnitByDate = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default StatisUnitByDate;

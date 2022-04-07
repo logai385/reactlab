@@ -51,7 +51,7 @@ export default function RegisterLine() {
         width: "5%",
       },
       {
-        title: "Số Tuyến",
+        title: "Tuyến",
         dataIndex: "lineNumber",
         key: "lineNumber",
         width: "7%",
@@ -62,7 +62,7 @@ export default function RegisterLine() {
         ),
       },
       {
-        title: "Tên Tuyến",
+        title: "Tên",
         dataIndex: "description",
         key: "description",        
       },
@@ -78,7 +78,7 @@ export default function RegisterLine() {
         title: "T.Thái",
         dataIndex: "status",
         key: "status",
-        width: "7%",
+        width: "8%",
         render: (status) =>
           status ? (
             <Tag color="green">Enable</Tag>

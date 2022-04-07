@@ -155,6 +155,7 @@ export default function Transporter() {
         title: "Biển Số",
         dataIndex: "plate",
         key: "plate",
+        width: "15%",
         ...getColumnSearchProps("plate"),
         render: (plate) => (
           <Tag color="geekblue">
@@ -166,6 +167,7 @@ export default function Transporter() {
         title: "T. Chính",
         dataIndex: "mainLines",
         key: "mainLines",
+        width: "15%",
         render: (lines) =>
           lines.map((line, index) => {
             return (
@@ -179,6 +181,7 @@ export default function Transporter() {
         title: "T. Tăng cường",
         dataIndex: "minorLines",
         key: "minorLines",
+        width: "15%",
         render: (lines) =>
           lines.map((line, index) => {
             return (

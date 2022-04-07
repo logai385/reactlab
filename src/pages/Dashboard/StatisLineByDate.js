@@ -59,10 +59,10 @@ const StatisLineByDate = () => {
     ],
   };
   return (
-    <>
-      <Pie data={data} className="chart__content" />
+    <div className="chart__content">
+      <Pie data={data} className="piechart__content" />
       <div className="data__action">
-        <h5>Thống kế Tuyến theo khoảng</h5>
+        <h5 className="text-center">Thống kế theo tuyến</h5>
 
         <div className="input-group ">
           <Select
@@ -76,7 +76,7 @@ const StatisLineByDate = () => {
             {renderLineOption()}
           </Select>
           <DatePicker
-          suffixIcon={null}
+          
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -85,8 +85,7 @@ const StatisLineByDate = () => {
               setQueryData({ ...queryData, startDate: dateString });
             }}
           />
-          <DatePicker
-          suffixIcon={null}
+          <DatePicker        
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}
@@ -96,7 +95,7 @@ const StatisLineByDate = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default StatisLineByDate;

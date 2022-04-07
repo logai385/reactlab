@@ -85,12 +85,12 @@ const StatisLineByMonth = () => {
     labels,
     datasets: [
       {
-        label: "bỏ chuyến",
+        label: "Mất chuyến",
         data: lineByMonthDataChart.map((item) => item.miss),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "tổng chuyến",
+        label: "Tổng chuyến",
         data: lineByMonthDataChart.map((item) => item.total),
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },

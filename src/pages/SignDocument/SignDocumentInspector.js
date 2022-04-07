@@ -66,19 +66,19 @@ export default function SignDocument() {
         dataIndex: "#",
         key: "#",
         width: "7%",
-        fixed: "left",
+        
       },
       {
         title: "Ngày",
         dataIndex: "date",
         key: "date",
-        fixed: "left",
+        width: "12%",
       },
       {
         title: "Tuyến",
         dataIndex: "Line",
         key: "Line",
-        fixed: "left",
+        width: "7%",
         render: (line) => (
           <Tag color="red" key={line}>
             {line}
@@ -89,6 +89,7 @@ export default function SignDocument() {
         title: "Xe",
         dataIndex: "plate",
         key: "plate",
+        width: "12%",
         render: (plate) => (
           <Tag color="geekblue" key={plate}>
             {plate}
@@ -102,7 +103,7 @@ export default function SignDocument() {
         key: "quantity",
       },
       {
-        title: "Lỡ chuyến",
+        title: "Mất chuyến",
         dataIndex: "missQuantity",
         key: "missQuantity",
       },
@@ -180,7 +181,7 @@ export default function SignDocument() {
         {/* Main content */}
 
         <section className="content">
-          <div className="row mb-3 ">
+          <div className="row mb-3">
           
             <div className="data__action col-12 input-group justify-content-end">
               <Select
@@ -189,7 +190,7 @@ export default function SignDocument() {
                   setQueryData({ ...queryData, line: value });
                 }}
                 className="mr-1"
-                style={{ maxWidth: "40%" }}
+                style={{ maxWidth: "35%" }}
                 value={queryData.line ? queryData.line : lineLst[0]?._id}
               >
                 {renderLineOption()}
@@ -197,6 +198,7 @@ export default function SignDocument() {
               <DatePicker
                 name="startDate"
                 className="mr-1"
+                style={{ maxWidth: "30%" }}
                 placeholder="Ngày bắt đầu"
                 defaultValue={moment(queryData.startDate)}
                 onChange={(date, dateString) => {
@@ -206,6 +208,7 @@ export default function SignDocument() {
               <DatePicker
                 name="endDate"
                 placeholder="Ngày kết thúc"
+                style={{ maxWidth: "30%" }}
                 defaultValue={moment(queryData.endDate)}
                 onChange={(date, dateString) => {
                   setQueryData({ ...queryData, endDate: dateString });

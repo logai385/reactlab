@@ -63,11 +63,13 @@ export default function SignDocument() {
         title: "Ngày",
         dataIndex: "date",
         key: "date",
+        width: "12%",
       },
       {
         title: "Tuyến",
         dataIndex: "Line",
         key: "Line",
+        width: "7%",
         render: (line) => (
           <Tag color="red" key={line}>
             {line}
@@ -78,6 +80,7 @@ export default function SignDocument() {
         title: "Xe",
         dataIndex: "plate",
         key: "plate",
+        width: "12%",
         render: (plate) => (
           <Tag color="geekblue" key={plate}>
             {plate}
@@ -91,7 +94,7 @@ export default function SignDocument() {
         key: "quantity",
       },
       {
-        title: "Lỡ chuyến",
+        title: "Mất chuyến",
         dataIndex: "missQuantity",
         key: "missQuantity",
       },

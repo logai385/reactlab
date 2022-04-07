@@ -10,12 +10,12 @@ const Dashboard = () => {
       {/* <MainBreadcrumb contentTitle="Dashboard" /> */}
       <div className="mt-3 px-0 px-md-5">
         <div className="row container-fluid ">
-          <h5>Thống kế Chuyến theo Tháng</h5>
+          <h5>Thống kế trong tháng</h5>
           <div className="col-12 chart__item mb-3">
             <StatisLineByMonth />
           </div>
           {/* <h5 className="col-12 col-md-6">Thống kế Chuyến theo khoảng</h5> */}
-          <div className="row container-fluid">
+          {/* <div className="row container-fluid"> */}
             <div className="col-12 col-md-6 chart__item">
               <StatisLineByDate />
             </div>
@@ -25,7 +25,7 @@ const Dashboard = () => {
             <div className="col-12 col-md-6 chart__item">
               <StatisUnitByDate />
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </>

@@ -60,10 +60,10 @@ const StatisBusByDate = () => {
     ],
   };
   return (
-    <>
-      <Pie data={data} className="chart__content" />
+    <div className="chart__content">
+      <Pie data={data} className="piechart__content" />
       <div className="data__action">
-        <h5>Thống kế Bus theo khoảng</h5>
+        <h5 className="text-center">Thống kế theo xe</h5>
 
         <div className="input-group ">
           <Select
@@ -76,8 +76,7 @@ const StatisBusByDate = () => {
           >
             {renderBusOption()}
           </Select>
-          <DatePicker
-            suffixIcon={null}
+          <DatePicker            
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -87,8 +86,7 @@ const StatisBusByDate = () => {
               setQueryData({ ...queryData, startDate: dateString });
             }}
           />
-          <DatePicker
-            suffixIcon={null}
+          <DatePicker        
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}
@@ -98,7 +96,7 @@ const StatisBusByDate = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default StatisBusByDate;
