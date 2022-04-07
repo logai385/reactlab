@@ -8,6 +8,8 @@ import {
 import { Image, Popconfirm, Space, Table, Tag, Select, DatePicker } from "antd";
 import { URL_STATIC } from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
+import { FilePdfOutlined } from "@ant-design/icons";
+
 import { getLineListAct } from "../../redux/line/LineAction";
 // import { openFormEdit } from "../../redux/modal/ModalAction";
 // import SignDocumentForm from "./SignDocumentForm";
@@ -111,13 +113,20 @@ export default function SignDocument() {
         title: "File",
         dataIndex: "files",
         key: "files",
-        render: (text, record, index) => (
-          <Image.PreviewGroup>
-            {record.files.map((file, index) => {
-              return <Image key={index} width={20} src={`${URL_STATIC}/${file}`} />;
-            })}
-          </Image.PreviewGroup>
-        ),
+        render: (text, record, index) => {
+          return record.files.map((file, index) => {
+            if (file.substr(file.length - 3) !== "pdf") {
+              return (
+                <Image key={index} src={`${URL_STATIC}/${file}`} width={20} />
+              );
+            } else
+              return (
+                <a key={index} href={`${URL_STATIC}/${file}`} target="_blank" rel="noreferrer noopener">                  
+                  <FilePdfOutlined />
+                </a>
+              );
+          });
+        },
       },
       // {
       //   title: "#",
