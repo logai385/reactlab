@@ -67,11 +67,11 @@ const SignDocumentAdd = (props) => {
 
   useEffect(() => {
     dispatch(getLineByUserAct());
-
-    dispatch(getTransporterByLineAct(values.line));
+    const searchLine = values.line||userLine[0]?._id;
+    dispatch(getTransporterByLineAct(searchLine));
 
     return () => {};
-  }, []);
+  }, [userLine[0]?._id]);
 
   return (
     <>
@@ -151,7 +151,7 @@ const SignDocumentAdd = (props) => {
                 )}
               </div>
               <div className="form-group">
-                <label>Số lỡ chuyến </label>
+                <label>Số mất chuyến </label>
                 <Input
                   size="large"
                   type="number"
@@ -253,7 +253,7 @@ const SignDocumentFormik = withFormik({
 
   displayName: "SignDocumentForm",
 })(SignDocumentAdd);
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {  
   return {
     userLine: state.LineReducer.userLine,
   };

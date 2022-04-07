@@ -18,7 +18,6 @@ const StatisLineByDate = () => {
   const { lineByDateDataChart } = useSelector(
     (state) => state.DashboardReducer
   );
-  console.log("lineByDateDataChart", lineByDateDataChart);
   const labels = ["Chuyến mất", "Tổng Chuyến"];
 
   const date = new Date();

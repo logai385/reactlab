@@ -20,7 +20,6 @@ const StatisUnitByDate = () => {
   const { unitByDateDataChart } = useSelector(
     (state) => state.DashboardReducer
   );
-  console.log("unitByDateDataChart", unitByDateDataChart);
   const labels = ["Mất chuyến", "Tổng chuyến"];
 
   const date = new Date();
