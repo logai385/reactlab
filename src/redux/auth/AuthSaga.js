@@ -6,6 +6,7 @@ import {
   STATUS_CODE,
 } from "../../ultil/systemSettings";
 import { CHECK_AUTH_API, LOGIN_API, SET_AUTHTOKEN } from "./AuthConst";
+import { getLineByUserAct } from "../../redux/line/LineAction";
 
 function* loginUser(action) {
   try {
@@ -37,6 +38,8 @@ function* checkAuth(action) {
             user: data,
           },
         });
+        yield put(  getLineByUserAct());
+      
       }
     } catch (error) {
       yield navigate("/login");
