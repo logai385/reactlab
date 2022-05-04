@@ -38,7 +38,7 @@ function* checkAuth(action) {
             user: data,
           },
         });
-        yield put(  getLineByUserAct());
+        yield put(getLineByUserAct());
       
       }
     } catch (error) {
