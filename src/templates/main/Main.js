@@ -14,6 +14,7 @@ const Main = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.AuthReducer);
+  console.log(user);
   const [state, setState] = useState({
     collapsed: false,
   });
@@ -59,8 +60,13 @@ const Main = () => {
             <span className="brand-text">Quản lý Tuyến</span>
           </div>
 
-        
-          <Menu className="userSection" key="menu1" mode="vertical"  selectedKeys={[current]} onClick={handleClick}>
+          <Menu
+            className="userSection"
+            key="menu1"
+            mode="vertical"
+            selectedKeys={[current]}
+            onClick={handleClick}
+          >
             <SubMenu
               key="sub1"
               icon={
@@ -86,50 +92,69 @@ const Main = () => {
               >
                 Thoát
               </Menu.Item>
-              <Menu.Item key="/user">
-                <Link to="/user">DS nhân viên</Link>
-              </Menu.Item>
+              {user?.role === "ADMINISTRATOR" && (
+                <Menu.Item key="/user">
+                  <Link to="/user">DS nhân viên</Link>
+                </Menu.Item>
+              )}
             </SubMenu>
           </Menu>
-          <Menu mode="inline" defaultSelectedKeys={["/dashboard"]}  selectedKeys={[current]}  onClick={handleClick}>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["/dashboard"]}
+            selectedKeys={[current]}
+            onClick={handleClick}
+          >
             <Menu.Item key="/dashboard">
               <Link to="/dashboard">
                 <i className="nav-icon fas fa-tachometer-alt"></i> Thống kê
               </Link>
             </Menu.Item>
-            <Menu.Item key="/insp/document">
-              <Link to="/insp/document">
-                <i className="nav-icon fa fa-check-double"></i> Nghiệm thu
-              </Link>
-            </Menu.Item>
-            <SubMenu
-              key="sub2"
-              
-              icon={<AppstoreOutlined />}
-              title="Quản lý"
-              mode="vertical"
-            >
-              <Menu.Item key="/unit">
-                <Link to="/unit">
-                  <i className="nav-icon fa fa-store"></i> DN Vận tải
+            {(user?.role === "ADMINISTRATOR" ||
+              user?.role === "SUPERVISOR") && (
+              <Menu.Item key="/insp/document">
+                <Link to="/insp/document">
+                  <i className="nav-icon fa fa-check-double"></i> Nghiệm thu
                 </Link>
               </Menu.Item>
-              <Menu.Item key="/line">
-                <Link to="/line">
-                  <i className="nav-icon fa fa-route"></i> Tuyến
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="/transporter">
-                <Link to="/transporter">
-                  <i className="nav-icon fa fa-bus-alt"></i> Xe
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="/document">
-                <Link to="/document">
-                  <i className="nav-icon fa fa-file-alt"></i> Lệnh vận chuyển
-                </Link>
-              </Menu.Item>
-            </SubMenu>
+            )}
+            {user?.role !== "SUPERVISOR" && (
+              <>
+                <SubMenu
+                  key="sub2"
+                  icon={<AppstoreOutlined />}
+                  title="Quản lý"
+                  mode="vertical"
+                >
+                  {user?.role === "ADMINISTRATOR" && (
+                    <>
+                      <Menu.Item key="/unit">
+                        <Link to="/unit">
+                          <i className="nav-icon fa fa-store"></i> DN Vận tải
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key="/line">
+                        <Link to="/line">
+                          <i className="nav-icon fa fa-route"></i> Tuyến
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key="/transporter">
+                        <Link to="/transporter">
+                          <i className="nav-icon fa fa-bus-alt"></i> Xe
+                        </Link>
+                      </Menu.Item>
+                    </>
+                  )}
+                  {user?.role === "OPERATOR" && (
+                    <Menu.Item key="/document">
+                      <Link to="/document">
+                        <i className="nav-icon fa fa-file-alt"></i> Lệnh vận chuyển
+                      </Link>
+                    </Menu.Item>
+                  )}
+                </SubMenu>
+              </>
+            )}
           </Menu>
         </Sider>
         <Layout>

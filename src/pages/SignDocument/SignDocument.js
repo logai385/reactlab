@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, FilePdfOutlined } from "@ant-design/icons";
 import {
   deleteDocumentAct,
   getDocumentsAct,
@@ -102,13 +102,20 @@ export default function SignDocument() {
         title: "File",
         dataIndex: "files",
         key: "files",
-        render: (text, record, index) => (
-          <Image.PreviewGroup >
-            {record.files.map((file, index) => {
-              return <Image width={20} src={`${URL_STATIC}/${file}`} />;
-            })}
-          </Image.PreviewGroup>
-        ),
+        render: (text, record, index) => {
+          return record.files.map((file, index) => {
+            if (file.substr(file.length - 3) !== "pdf") {
+              return (
+                <Image key={index} src={`${URL_STATIC}/${file}`} width={20} />
+              );
+            } else
+              return (
+                <a key={index} href={`${URL_STATIC}/${file}`} target="_blank" rel="noreferrer noopener">                  
+                  <FilePdfOutlined />
+                </a>
+              );
+          });
+        },
       },
       {
         title: "#",

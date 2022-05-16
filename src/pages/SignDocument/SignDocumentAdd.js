@@ -223,6 +223,12 @@ const SignDocumentFormik = withFormik({
       documentImg: [],
     };
   },
+  validate: (values, props) => {
+    const errors={};
+    if(values.missQuantity>values.quantity) errors.missQuantity="Số mất chuyến không được lớn hơn số chuyến"
+    else errors.missQuantity=null;
+    return errors;
+  },
   validationSchema: Yup.object().shape({
     dateSign: Yup.string().required("Ngày không được để trống"),
     line: Yup.string().required("Tuyến không được để trống"),
