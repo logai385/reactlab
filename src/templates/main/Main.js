@@ -99,7 +99,7 @@ const Main = () => {
             </Menu.Item>
             <Menu.Item key="/insp/document">
               <Link to="/insp/document">
-                <i className="nav-icon fa fa-check-double"></i> Kiểm kê
+                <i className="nav-icon fa fa-check-double"></i> Nghiệm thu
               </Link>
             </Menu.Item>
             <SubMenu
@@ -126,7 +126,7 @@ const Main = () => {
               </Menu.Item>
               <Menu.Item key="/document">
                 <Link to="/document">
-                  <i className="nav-icon fa fa-file-alt"></i> Giấy phép
+                  <i className="nav-icon fa fa-file-alt"></i> Lệnh vận chuyển
                 </Link>
               </Menu.Item>
             </SubMenu>
