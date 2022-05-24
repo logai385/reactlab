@@ -226,7 +226,7 @@ const SignDocumentFormik = withFormik({
   validate: (values, props) => {
     const errors={};
     if(values.missQuantity>values.quantity) errors.missQuantity="Số mất chuyến không được lớn hơn số chuyến"
-    else errors.missQuantity=null;
+
     return errors;
   },
   validationSchema: Yup.object().shape({
@@ -244,6 +244,7 @@ const SignDocumentFormik = withFormik({
       .required("Yêu cầu nhập file"),
   }),
   handleSubmit: (values, { props }) => {
+    console.log("Hoang Giang");
     const formData = new FormData();
     formData.append("transporter", values.transporter);
     formData.append("dateSign", values.dateSign);
