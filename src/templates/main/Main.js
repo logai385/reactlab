@@ -114,7 +114,7 @@ const Main = () => {
               user?.role === "SUPERVISOR") && (
               <Menu.Item key="/insp/document">
                 <Link to="/insp/document">
-                  <i className="nav-icon fa fa-check-double"></i> Kiểm kê
+                  <i className="nav-icon fa fa-check-double"></i> Nghiệm thu
                 </Link>
               </Menu.Item>
             )}
@@ -148,7 +148,7 @@ const Main = () => {
                   {user?.role === "OPERATOR" && (
                     <Menu.Item key="/document">
                       <Link to="/document">
-                        <i className="nav-icon fa fa-file-alt"></i> Giấy phép
+                        <i className="nav-icon fa fa-file-alt"></i> Lệnh vận chuyển
                       </Link>
                     </Menu.Item>
                   )}
