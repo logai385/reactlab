@@ -24,12 +24,15 @@ const StatisBusByDate = () => {
 
   const date = new Date();
   const [queryData, setQueryData] = useState({
-    bus:busLst[0]?._id,
+    bus: busLst[0]?._id,
     startDate: new Date(date.getFullYear(), date.getMonth(), 1).toISOString(),
     endDate: new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString(),
   });
+  const [selectedItems, setSelectedItems] = useState([]);
+  const filteredOptions = busLst.filter((o) => !selectedItems.includes(o));
+
   const renderBusOption = () =>
-    busLst.map((item) => (
+    filteredOptions.map((item) => (
       <Option key={item._id} value={item._id}>
         {item.plate}
       </Option>
@@ -38,13 +41,13 @@ const StatisBusByDate = () => {
     dispatch(getTransporterListAct());
     dispatch(
       getBusByDateDataChart({
-        bus: queryData.bus?queryData.bus:busLst[0]?._id,
+        bus: queryData.bus ? queryData.bus : busLst[0]?._id,
         startDate: queryData.startDate,
         endDate: queryData.endDate,
       })
     );
-    
-    return () => { };
+
+    return () => {};
   }, [queryData]);
 
   const data = {
@@ -59,6 +62,7 @@ const StatisBusByDate = () => {
       },
     ],
   };
+
   return (
     <div className="chart__content">
       <Pie data={data} className="piechart__content" />
@@ -70,13 +74,23 @@ const StatisBusByDate = () => {
             name="bus"
             onChange={(value) => {
               setQueryData({ ...queryData, bus: value });
+              setSelectedItems(value);
             }}
+            placeholder="Chọn xe"
             className="mr-1"
-            value={queryData.bus?queryData.bus:busLst[0]?._id}
+            value={selectedItems} 
+            style={{
+              width: "30%",
+            }}
+            showSearch={true}
+            filterOption={(inputValue, option)=>{            
+              return option.children.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+            }
+            }
           >
             {renderBusOption()}
           </Select>
-          <DatePicker            
+          <DatePicker
             name="startDate"
             className="mr-1"
             placeholder="Ngày bắt đầu"
@@ -86,7 +100,7 @@ const StatisBusByDate = () => {
               setQueryData({ ...queryData, startDate: dateString });
             }}
           />
-          <DatePicker        
+          <DatePicker
             name="endDate"
             placeholder="Ngày kết thúc"
             defaultValue={moment(queryData.endDate)}
