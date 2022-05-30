@@ -1,5 +1,5 @@
-export const API_URL = 'http://localhost:5000/api';
-export const URL_STATIC = 'http://localhost:5000/static';
+export const API_URL = 'http://103.184.113.83:5000/api';
+export const URL_STATIC = 'http://103.184.113.83:5000/static';
 export const STATUS_CODE={
     SUCCESS: 200,
     CREATED: 201,
