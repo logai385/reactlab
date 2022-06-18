@@ -215,7 +215,7 @@ const Unit = () => {
                   <Input
                     type="text"
                     name="name"
-                    placeholder="Tên đại lý"
+                    placeholder="Tên đơn vị"
                     value={formData.name}
                     onChange={(e) => {
                       setFormData({

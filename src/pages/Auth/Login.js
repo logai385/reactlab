@@ -37,12 +37,12 @@ export const Login = () => {
           <div className="col-sm-6 login__left"></div>
           <div className="col-12 col-sm-6 login__right">
             <form className="form " onSubmit={handleSubmit}>
-              <h1 className="text-center display-3">Login</h1>
+              <h1 className="text-center display-3">Đăng Nhập</h1>
               <div className="form-group my-5">
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="Enter User Name"
+                  placeholder="Tên tài khoản"
                   name="username"
                   value={userForm.username}
                   required
@@ -50,7 +50,7 @@ export const Login = () => {
                 />
                 <input
                   type="password"
-                  placeholder="Enter Password"
+                  placeholder="Mật khẩu"
                   name="password"
                   required
                   className="form-control mt-4"
@@ -59,7 +59,7 @@ export const Login = () => {
                 />
 
                 <button className="btn btn-primary mt-4" type="submit">
-                  Log In
+                  Đăng nhập
                 </button>
               </div>
             </form>

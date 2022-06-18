@@ -20,7 +20,7 @@ export default function Modal() {
     <>
       <Drawer
         className="modal__drawer"
-        title="Add/Update"
+        title="Thêm/Cập nhật"
         
         onClose={onClose}
         visible={visible}
@@ -30,7 +30,7 @@ export default function Modal() {
             <Space>
               <Button onClick={onClose}><i className="fa fa-angle-double-left"></i></Button>
               <Button onClick={callBackSubmit} type="primary">
-                Submit
+                Xác nhận
               </Button>
             </Space>
           }

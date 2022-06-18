@@ -277,7 +277,7 @@ export default function Transporter() {
                 />
                 <div className="input-group-append">
                   <button className="btn btn-outline-primary" type="button">
-                    search
+                    Tìm kiếm
                   </button>
                   <button
                     className="btn btn-primary"
