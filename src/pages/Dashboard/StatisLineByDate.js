@@ -61,7 +61,7 @@ const StatisLineByDate = () => {
     <div className="chart__content">
       <Pie data={data} className="piechart__content" />
       <div className="data__action">
-        <h5 className="text-center">Thống kế theo tuyến</h5>
+        <h5 className="text-center">Thống kê theo tuyến</h5>
 
         <div className="input-group ">
           <Select

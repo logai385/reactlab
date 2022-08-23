@@ -21,7 +21,7 @@ export default function SignDocument() {
     const documentList = useSelector(
         (state) => state.DocumentReducer.documentList
     );
-
+    const { user } = useSelector((state) => state.AuthReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -128,7 +128,7 @@ export default function SignDocument() {
                 render: (text, record, index) => {
                     const diff = getDaysBetweenDates(record.createdAt, new Date().toString());
                     return (
-                        diff < 2 ?
+                        (diff < 2 || user?.role === "ADMINISTRATOR") ?
                             <Space size="middle">
                                 <Popconfirm
                                     placement="topRight"

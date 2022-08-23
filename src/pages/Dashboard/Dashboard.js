@@ -10,7 +10,7 @@ const Dashboard = () => {
       {/* <MainBreadcrumb contentTitle="Dashboard" /> */}
       <div className="mt-3 px-0 px-md-5">
         <div className="row container-fluid ">
-          <h5>Thống kế trong tháng</h5>
+          <h5>Thống kê trong tháng</h5>
           <div className="col-12 chart__item mb-3">
             <StatisLineByMonth />
           </div>
