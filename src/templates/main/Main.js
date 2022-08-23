@@ -14,7 +14,7 @@ const Main = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.AuthReducer);
-  console.log(user);
+  // console.log(user);
   const [state, setState] = useState({
     collapsed: false,
   });

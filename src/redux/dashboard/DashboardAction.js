@@ -7,6 +7,8 @@ import {
   GET_BUS_BY_DATE_DATA_CHART,
   SET_UNIT_BY_DATE_DATA_CHART,
   GET_UNIT_BY_DATE_DATA_CHART,
+  SET_All_LINE_BY_DATE_DATA_CHART,
+  GET_All_LINE_BY_DATE_DATA_CHART,
 } from "./DashboardConst";
 
 export const setLineByDateDataChart = (data) => ({
@@ -39,5 +41,13 @@ export const setUnitByDateDataChart = (data) => ({
 });
 export const getUnitByDateDataChart = (queryDate) => ({
   type: GET_UNIT_BY_DATE_DATA_CHART,
+  payload: queryDate,
+});
+export const setAllLineByDateDataChart = (data) => ({
+  type: SET_All_LINE_BY_DATE_DATA_CHART,
+  payload: data,
+});
+export const getALLLineByDateDataChart = (queryDate) => ({
+  type: GET_All_LINE_BY_DATE_DATA_CHART,
   payload: queryDate,
 });

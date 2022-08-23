@@ -2,12 +2,14 @@ import { takeLatest, put, call } from "redux-saga/effects";
 import DashboardService from "../../services/DashboardService";
 import { STATUS_CODE } from "../../ultil/systemSettings";
 import {
+  setAllLineByDateDataChart,
   setBusByDateDataChart,
   setLineByDateDataChart,
   setLineByMonthDataChart,
   setUnitByDateDataChart,
 } from "./DashboardAction";
 import {
+  GET_All_LINE_BY_DATE_DATA_CHART,
   GET_BUS_BY_DATE_DATA_CHART,
   GET_LINE_BY_DATE_DATA_CHART,
   GET_LINE_BY_MONTH_DATA_CHART,
@@ -63,7 +65,7 @@ function* getUnitByDateDataApi(action) {
       DashboardService.getUnitByDateData,
       action.payload
     );
-      console.log(data);
+      // console.log(data);
     if (status === STATUS_CODE.SUCCESS) {
       yield put(setUnitByDateDataChart(data));
     }
@@ -71,10 +73,27 @@ function* getUnitByDateDataApi(action) {
     console.log(error);
   }
 }
+function* getAllLineByDateDataApi(action) {
+  try {
+    const { data, status } = yield call(
+      DashboardService.getAllLineByDateData,
+      action.payload
+    );
+      // console.log(data);
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put(setAllLineByDateDataChart(data));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 function* DashboardSaga() {
   yield takeLatest(GET_LINE_BY_MONTH_DATA_CHART, getUnitLineByMonthDataApi);
   yield takeLatest(GET_LINE_BY_DATE_DATA_CHART, getUnitLineByDateDataApi);
   yield takeLatest(GET_BUS_BY_DATE_DATA_CHART, getUnitBusByDateDataApi);
   yield takeLatest(GET_UNIT_BY_DATE_DATA_CHART, getUnitByDateDataApi);
+  yield takeLatest(GET_All_LINE_BY_DATE_DATA_CHART, getAllLineByDateDataApi);
 }
 export default DashboardSaga;

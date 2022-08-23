@@ -12,6 +12,7 @@ import {Image, Popconfirm, Space, Table, Tag} from "antd";
 import {URL_STATIC} from "../../ultil/systemSettings";
 import MainBreadcrumb from "../../templates/main/MainBreadcrumb/MainBreadcrumb";
 import {getDaysBetweenDates} from "../../ultil/utils";
+import { date } from "yup";
 
 // import { openFormEdit } from "../../redux/modal/ModalAction";
 // import SignDocumentForm from "./SignDocumentForm";
@@ -125,7 +126,7 @@ export default function SignDocument() {
                 fixed: "right",
                 width: "7%",
                 render: (text, record, index) => {
-                    const diff = getDaysBetweenDates(record.dateSign, new Date().toString());
+                    const diff = getDaysBetweenDates(record.createdAt, new Date().toString());
                     return (
                         diff < 2 ?
                             <Space size="middle">
@@ -152,7 +153,7 @@ export default function SignDocument() {
             return {
                 "#": index + 1,
                 date: formatDate(document.dateSign),
-                dateSign: document.dateSign,
+                createdAt: document.createdAt || new date("1985-03-02"),
                 plate: document.transporter?.plate,
                 Line: document.line?.lineNumber,
                 quantity: document.quantity,
