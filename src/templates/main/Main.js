@@ -145,13 +145,13 @@ const Main = () => {
                       </Menu.Item>
                     </>
                   )}
-                  {user?.role === "OPERATOR" && (
+                 
                     <Menu.Item key="/document">
                       <Link to="/document">
                         <i className="nav-icon fa fa-file-alt"></i> Lệnh vận chuyển
                       </Link>
                     </Menu.Item>
-                  )}
+                  
                 </SubMenu>
               </>
             )}
